@@ -22,6 +22,11 @@
 			
 		</property>
 		
+		<property name="mappingResources">
+	        <list>
+	            <value>Event.hbm.xml</value>
+	        </list>
+	    </property>	
 		<property name="jpaPropertyMap">
 			<map>
 				<entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
