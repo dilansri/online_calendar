@@ -1,7 +1,10 @@
 package com.xfinity.controller;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +16,24 @@ import com.dhtmlx.planner.DHXSkin;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.EventsManager;
+import com.xfinity.model.Event;
+import com.xfinity.service.EventService;
 
 @Controller
 public class HelloController {
 	
+	@Autowired
+	private EventService eventService;
+	
 	@RequestMapping(value="/greeting")
 	public String sayHello(Model model){
 		model.addAttribute("greeting","HELLO WORLDss");
+		
+		Event evt = new Event();
+		evt.setStart_date(new Date(115,5,24));
+		evt.setEnd_date(new Date(115,5,25));
+		evt.setText("Test Event");
+		eventService.save(evt);
 		return "hello";
 	}	
 	
@@ -40,6 +54,9 @@ public class HelloController {
     @ResponseBody public String events(HttpServletRequest request) {
             EventsManager evs = new EventsManager(request);
             return evs.run();
+            
+            //CustomEventsManager evs = new CustomEventsManager(request);
+            //return evs.run();
     }
 	
 }
