@@ -1,11 +1,14 @@
 package com.xfinity.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import com.xfinity.model.Event;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+
+import com.xfinity.model.Event;
 
 @Repository("eventRepository")
 public class EventRepositoryImpl implements EventRepository {
@@ -21,4 +24,14 @@ public class EventRepositoryImpl implements EventRepository {
 		return event;
 	}
 
+	public List<Event> loadAll() {
+		Query query = em.createQuery("Select e from Event e");
+		
+		
+		List events = query.getResultList();
+		
+		return events;
+	}
+
 }
+ 

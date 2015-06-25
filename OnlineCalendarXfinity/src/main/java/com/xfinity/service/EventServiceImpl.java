@@ -1,5 +1,7 @@
 package com.xfinity.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,10 @@ public class EventServiceImpl implements EventService {
 	@Transactional
 	public Event save(Event event) {
 		return eventRepository.save(event);
+	}
+
+	public List<Event> findAllEvents() {
+		return eventRepository.loadAll();
 	}
 
 }
