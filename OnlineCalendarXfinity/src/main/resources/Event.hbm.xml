@@ -5,10 +5,13 @@
 <hibernate-mapping> 
         <class name="com.xfinity.model.Event" table="events">
                 <id column="event_id" name="id" type="java.lang.Integer">
-                        <generator class="increment"/>
-                </id>
-                <property column="start_date" name="start_date" type="timestamp"/>
-                <property column="end_date" name="end_date" type="timestamp"/>
-                <property column="event_name" name="text" type="java.lang.String"/>
+					<generator class="increment"/>
+				</id>
+				<property column="start_date" name="start_date" type="timestamp"/>
+				<property column="end_date" name="end_date" type="timestamp"/>
+			    <property column="text" name="text" type="java.lang.String"/>
+			    <property column="rec_type" name="rec_type" type="java.lang.String"/>
+			    <property column="event_length" name="event_length" type="java.lang.Integer"/>
+			    <property column="event_pid" name="event_pid" type="java.lang.Integer"/>
         </class>
 </hibernate-mapping>

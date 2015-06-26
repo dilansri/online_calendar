@@ -1,8 +1,8 @@
 package com.xfinity.model;
 
-import com.dhtmlx.planner.DHXEvent;
+import com.dhtmlx.planner.DHXEventRec;
 
-public class Event extends DHXEvent {
+public class Event extends DHXEventRec {
 		
 
 }

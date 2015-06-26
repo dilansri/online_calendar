@@ -34,8 +34,15 @@ public class EventManager extends DHXEventsManager {
 	@Override
 	public DHXStatus saveEvent(DHXEv event, DHXStatus status) {
 		//eventService.save(event);
+		Event ev = (Event)event;
+		if (status == DHXStatus.INSERT){
+			eventService.save(ev);
+		}else if (status == DHXStatus.UPDATE){
+			
+		}
 		return status;
 	}
+	
 	
 
 }

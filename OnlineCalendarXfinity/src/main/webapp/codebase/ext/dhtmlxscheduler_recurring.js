@@ -472,6 +472,8 @@ scheduler.showLightbox = function(id) {
 	// show series
 	var showSeries = function(id) {
 		var event = scheduler.getEvent(id);
+		console.log("EVENT ID");
+		console.log(id);
 		event._end_date = event.end_date;
 		event.end_date = new Date(event.start_date.valueOf() + event.event_length * 1000);
 		return scheduler.showLightbox_rec(id); // editing series
