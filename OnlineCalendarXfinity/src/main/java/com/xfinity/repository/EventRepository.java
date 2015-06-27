@@ -10,4 +10,7 @@ public interface EventRepository {
 
 	List<Event> loadAll();
 
+	void delete(Event ev);
+
+	void update(Event ev);
 }

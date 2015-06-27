@@ -33,5 +33,17 @@ public class EventRepositoryImpl implements EventRepository {
 		return events;
 	}
 
+	public void delete(Event ev) {
+		em.remove(em.contains(ev) ? ev : em.merge(ev));
+		em.flush();
+		
+	}
+
+	public void update(Event ev) {
+		em.persist(em.contains(ev) ? ev : em.merge(ev));
+		em.flush();
+		
+	}
+
 }
  

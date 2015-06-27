@@ -23,5 +23,16 @@ public class EventServiceImpl implements EventService {
 	public List<Event> findAllEvents() {
 		return eventRepository.loadAll();
 	}
+	
+	@Transactional
+	public void update(Event ev) {
+		eventRepository.update(ev);		
+	}
+	
+	@Transactional
+	public void delete(Event ev) {
+		eventRepository.delete(ev);
+		
+	}
 
 }

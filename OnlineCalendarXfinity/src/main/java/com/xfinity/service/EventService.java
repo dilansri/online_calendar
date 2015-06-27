@@ -9,5 +9,9 @@ public interface EventService {
 	Event save(Event event);
 
 	List<Event> findAllEvents();
+
+	void update(Event ev);
+
+	void delete(Event ev);
 	
 }

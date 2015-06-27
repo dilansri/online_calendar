@@ -38,7 +38,9 @@ public class EventManager extends DHXEventsManager {
 		if (status == DHXStatus.INSERT){
 			eventService.save(ev);
 		}else if (status == DHXStatus.UPDATE){
-			
+			eventService.update(ev);
+		}else if(status == DHXStatus.DELETE){
+			eventService.delete(ev);
 		}
 		return status;
 	}
