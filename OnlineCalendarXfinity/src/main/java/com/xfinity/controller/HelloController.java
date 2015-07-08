@@ -38,17 +38,17 @@ public class HelloController {
 		return "hello";
 	}	
 	
-	@RequestMapping("/myplanner.html")
+	@RequestMapping("/my/planner.html")
     public ModelAndView planner(HttpServletRequest request) throws Exception {
-            DHXPlanner p = new DHXPlanner("./codebase/", DHXSkin.GLOSSY);
+            DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.GLOSSY);
             p.setInitialDate(2013, 1, 2);
             p.extensions.add(DHXExtension.RECURRING);
             p.config.setScrollHour(8);
         	p.config.setFullDay(true);
         	p.config.setMultiDay(true);
             //p.setWidth(900);
-            p.load("events.html", DHXDataFormat.JSON);
-            p.data.dataprocessor.setURL("events.html");
+            p.load("../events.html", DHXDataFormat.JSON);
+            p.data.dataprocessor.setURL("../events.html");
             ModelAndView mnv = new ModelAndView("article");
             mnv.addObject("body", p.render());
             return mnv;
