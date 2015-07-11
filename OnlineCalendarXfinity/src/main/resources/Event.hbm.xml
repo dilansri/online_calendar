@@ -13,5 +13,8 @@
 			    <property column="rec_type" name="rec_type" type="java.lang.String"/>
 			    <property column="event_length" name="event_length" type="java.lang.Integer"/>
 			    <property column="event_pid" name="event_pid" type="java.lang.Integer"/>
+			    <many-to-one name="user" class="com.xfinity.model.User" fetch="select">
+		            <column name="username" />
+		        </many-to-one>
         </class>
 </hibernate-mapping>

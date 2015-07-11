@@ -19,12 +19,16 @@ import com.xfinity.event.manager.EventManager;
 import com.xfinity.event.manager.EventsManager;
 import com.xfinity.model.Event;
 import com.xfinity.service.EventService;
+import com.xfinity.service.UserService;
 
 @Controller
 public class HelloController {
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping(value="/greeting")
 	public String sayHello(Model model){
@@ -60,7 +64,7 @@ public class HelloController {
     @ResponseBody public String events(HttpServletRequest request) {
             //EventsManager evs = new EventsManager(request);
             //return evs.run();
-    	EventManager evs = new EventManager(request,eventService);
+    	EventManager evs = new EventManager(request,eventService,userService);
     	return evs.run();
             //CustomEventsManager evs = new CustomEventsManager(request);
             //return evs.run();
