@@ -8,7 +8,7 @@ public interface EventService {
 	
 	Event save(Event event);
 
-	List<Event> findAllEvents();
+	List<Event> findAllEvents(String username);
 
 	void update(Event ev);
 

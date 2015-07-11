@@ -24,9 +24,8 @@ public class EventRepositoryImpl implements EventRepository {
 		return event;
 	}
 
-	public List<Event> loadAll() {
-		Query query = em.createQuery("Select e from Event e");
-		
+	public List<Event> loadAll(String username) {
+		Query query = em.createQuery("from Event where username=?").setParameter(1, username);		
 		
 		List events = query.getResultList();
 		

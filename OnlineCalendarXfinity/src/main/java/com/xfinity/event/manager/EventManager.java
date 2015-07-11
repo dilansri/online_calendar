@@ -44,7 +44,7 @@ public class EventManager extends DHXEventsManager {
 	
 	@Override
     public Iterable getEvents() {
-		List<Event> events = eventService.findAllEvents();
+		List<Event> events = eventService.findAllEvents(user.getUsername());
 		return events;
 	}
 	

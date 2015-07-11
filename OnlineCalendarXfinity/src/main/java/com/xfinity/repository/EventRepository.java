@@ -8,7 +8,7 @@ public interface EventRepository {
 	
 	Event save(Event event);
 
-	List<Event> loadAll();
+	List<Event> loadAll(String username);
 
 	void delete(Event ev);
 

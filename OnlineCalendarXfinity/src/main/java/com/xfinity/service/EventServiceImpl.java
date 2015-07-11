@@ -20,8 +20,8 @@ public class EventServiceImpl implements EventService {
 		return eventRepository.save(event);
 	}
 
-	public List<Event> findAllEvents() {
-		return eventRepository.loadAll();
+	public List<Event> findAllEvents(String username) {
+		return eventRepository.loadAll(username);
 	}
 	
 	@Transactional
