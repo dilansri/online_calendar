@@ -12,7 +12,8 @@
 	<context:component-scan base-package="com.xfinity" />
 	
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-	
+		
+		
 	<bean id="entitiyManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="punit" />
 		<property name="dataSource" ref="dataSource" />
