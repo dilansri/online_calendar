@@ -20,7 +20,7 @@ import com.dhtmlx.planner.DHXPlanner;
 import com.dhtmlx.planner.DHXSkin;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
-import com.xfinity.event.manager.EventManager;
+import com.xfinity.event.manager.SharedEventManager;
 import com.xfinity.event.manager.TeamEventManager;
 import com.xfinity.model.User;
 import com.xfinity.service.CalendarService;
@@ -115,7 +115,7 @@ public class CalendarController {
     	
 	    User calendarUser = userService.getUser(user);
 	    
-    	EventManager evs = new EventManager(request,eventService,userService,calendarUser);
+	    SharedEventManager evs = new SharedEventManager(request,eventService,userService,calendarUser);
     	return evs.run();
             
     }
