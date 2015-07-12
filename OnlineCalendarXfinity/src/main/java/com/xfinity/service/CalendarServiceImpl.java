@@ -23,10 +23,10 @@ public class CalendarServiceImpl implements CalendarService {
 		return calendarRepository.saveSharedCalendar(calendar);
 	}
 
-	public boolean isCalendarShared(String sharedWith) {
+	public boolean isCalendarShared(String sharedBy) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String sharedBy = auth.getName(); //get logged in username
+	    String sharedWith = auth.getName(); //get logged in username
 		
 		return calendarRepository.isCalendarShared(sharedBy,sharedWith);
 	}
