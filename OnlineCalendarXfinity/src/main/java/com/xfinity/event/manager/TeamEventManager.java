@@ -35,7 +35,16 @@ public class TeamEventManager extends DHXEventsManager {
 	
 	@Override
     public Iterable getEvents() {
-		List<TeamEvent> events = teamEventService.findAllEvents();		
+		List<TeamEvent> events = teamEventService.findAllEvents();	
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String currentUser = auth.getName(); 
+		
+		for(TeamEvent evt : events){
+			if(!evt.getUser().getUsername().equals(currentUser)){
+				evt.setText(evt.getText()+" :"+evt.getUser().getUsername());
+			}
+		}
 		return events;
 	}
 	
@@ -57,11 +66,10 @@ public class TeamEventManager extends DHXEventsManager {
 		    }
 	    	
 	    }else if(status == DHXStatus.INSERT){
-	    	ev.setText(ev.getText()+ " by: " + currentUser);
-	    	ev.setUser(user);
+	    	ev.setText(ev.getText()+ " by: " + currentUser);	    	
 	    }
 	    
-	    
+	    ev.setUser(user);
 	    
 		//ev.setColor("orange");	    
 	    //ev.setUser(user);
