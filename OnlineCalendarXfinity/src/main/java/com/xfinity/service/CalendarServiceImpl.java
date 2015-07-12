@@ -1,5 +1,7 @@
 package com.xfinity.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +31,21 @@ public class CalendarServiceImpl implements CalendarService {
 	    String sharedWith = auth.getName(); //get logged in username
 		
 		return calendarRepository.isCalendarShared(sharedBy,sharedWith);
+	}
+
+	public List<String> getSharedCalendarsWithMe() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String me = auth.getName(); 
+		
+		return calendarRepository.getSharedWith(me);
+	}
+
+	public List<String> getSharedCalendarsByMe() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String me = auth.getName(); 
+		
+		return calendarRepository.getSharedBy(me);
 	}
 
 }

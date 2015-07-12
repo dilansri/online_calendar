@@ -1,6 +1,6 @@
 package com.xfinity.controller;
 
-import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +21,11 @@ import com.dhtmlx.planner.DHXSkin;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.EventManager;
-import com.xfinity.model.Event;
+import com.xfinity.event.manager.TeamEventManager;
 import com.xfinity.model.User;
 import com.xfinity.service.CalendarService;
 import com.xfinity.service.EventService;
+import com.xfinity.service.TeamEventService;
 import com.xfinity.service.UserService;
 
 @Controller
@@ -38,11 +39,19 @@ public class CalendarController {
 	@Autowired
 	EventService eventService;
 	
+	@Autowired
+	TeamEventService teamEventService;
+	
 	@RequestMapping(value="/my/share")
 	public ModelAndView share(HttpServletRequest request){
 		
 		ModelAndView mnv = new ModelAndView("shareCalendar");
-        //mnv.addObject("body", p.render());
+        
+		List<String> sharedWithMeUsers = calendarService.getSharedCalendarsWithMe();
+		List<String> sharedByMeUsers = calendarService.getSharedCalendarsByMe();
+		
+		mnv.addObject("sharedWithMeUsers", sharedWithMeUsers);
+		mnv.addObject("sharedByMeUsers", sharedByMeUsers);
         return mnv;
 	}	
 	
@@ -100,13 +109,67 @@ public class CalendarController {
 	}
 	
 	@RequestMapping("/sharedCalendar")
-    @ResponseBody public String events(HttpServletRequest request) {           
+    @ResponseBody public String sharedCalendar(HttpServletRequest request) {           
 		
 		String user= request.getParameter("user");    	
     	
 	    User calendarUser = userService.getUser(user);
 	    
     	EventManager evs = new EventManager(request,eventService,userService,calendarUser);
+    	return evs.run();
+            
+    }
+	
+	@RequestMapping("/my/teamCalendar.html")
+	public ModelAndView teamCalendar(WebRequest request, Model model) throws Exception{ 
+		
+		DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
+        //p.setInitialDate(2013, 1, 2);
+        //p.extensions.add(DHXExtension.RECURRING);
+        //p.config.setScrollHour(8);
+    	p.config.setFullDay(true);
+    	p.config.setMultiDay(true);
+    	//p.views.add(new DHXAgendaView());
+    	//p.extensions.add(DHXExtension.WEEK_AGENDA);
+    	p.calendars.attachMiniCalendar();
+    	p.extensions.add(DHXExtension.TOOLTIP);
+    	
+    	/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();*/
+	    
+    	//p.templates.setEventText(username+": {text}");
+        //p.setWidth(900);
+    	
+    	/*
+    	DHXBlockTime block = new DHXBlockTime();
+    	block.setDay(DHXDayOfWeek.SUNDAY);
+    	p.timespans.add(block);
+    	
+    	DHXBlockTime block2 = new DHXBlockTime();
+    	block2.setDay(DHXDayOfWeek.SATURDAY);
+    	p.timespans.add(block2);
+    	
+    	*/
+    	
+    	p.toPDF();
+    	
+        p.load("../teamEvents.html", DHXDataFormat.JSON);
+        p.data.dataprocessor.setURL("../teamEvents.html");
+		
+		ModelAndView mnv = new ModelAndView("article");
+		mnv.addObject("body", p.render());
+        return mnv;	
+	}
+	
+	@RequestMapping("/teamEvents")
+    @ResponseBody public String teamEvents(HttpServletRequest request) { 
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+		
+	    User user = userService.getUser(username);
+	    
+    	TeamEventManager evs = new TeamEventManager(request,teamEventService,user);
     	return evs.run();
             
     }

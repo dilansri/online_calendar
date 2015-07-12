@@ -39,4 +39,39 @@ public class CalendarRepositoryImpl implements CalendarRepository {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<String> getSharedWith(String user) {
+		Query query = em.createQuery("from SharedCalendar where sharedWith=?")
+				.setParameter(1, user);
+	
+		List<SharedCalendar> shared = new ArrayList<SharedCalendar>();
+		
+		shared = query.getResultList();
+		
+		List<String> sharedWithUser = new ArrayList<String>();
+		
+		for(SharedCalendar s:shared){
+			sharedWithUser.add(s.getSharedBy());
+		}		
+		
+		return sharedWithUser;
+	}
+
+	public List<String> getSharedBy(String user) {
+		Query query = em.createQuery("from SharedCalendar where sharedBy=?")
+				.setParameter(1, user);
+	
+		List<SharedCalendar> shared = new ArrayList<SharedCalendar>();
+		
+		shared = query.getResultList();
+		
+		List<String> sharedByUser = new ArrayList<String>();
+		
+		for(SharedCalendar s:shared){
+			sharedByUser.add(s.getSharedWith());
+		}		
+		
+		return sharedByUser;
+	}
+
 }
