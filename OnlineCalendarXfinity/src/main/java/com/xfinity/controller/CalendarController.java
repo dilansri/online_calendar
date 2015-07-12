@@ -39,9 +39,11 @@ public class CalendarController {
 	EventService eventService;
 	
 	@RequestMapping(value="/my/share")
-	public String sayHello(Model model){
-				
-		return "shareCalendar";
+	public ModelAndView share(HttpServletRequest request){
+		
+		ModelAndView mnv = new ModelAndView("shareCalendar");
+        //mnv.addObject("body", p.render());
+        return mnv;
 	}	
 	
 	@RequestMapping(value="/my/shareCalendar",method=RequestMethod.POST)
