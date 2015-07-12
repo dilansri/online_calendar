@@ -13,10 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dhtmlx.planner.DHXPlanner;
 import com.dhtmlx.planner.DHXSkin;
+import com.dhtmlx.planner.api.DHXBlockTime;
+import com.dhtmlx.planner.api.DHXTimeSpan.DHXDayOfWeek;
+import com.dhtmlx.planner.controls.DHXAgendaView;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.EventManager;
-import com.xfinity.event.manager.EventsManager;
 import com.xfinity.model.Event;
 import com.xfinity.service.EventService;
 import com.xfinity.service.UserService;
@@ -45,14 +47,30 @@ public class HelloController {
 	@RequestMapping("/my/planner.html")
     public ModelAndView planner(HttpServletRequest request) throws Exception {
             DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
-            p.setInitialDate(2013, 1, 2);
+            //p.setInitialDate(2013, 1, 2);
             p.extensions.add(DHXExtension.RECURRING);
-            p.config.setScrollHour(8);
+            //p.config.setScrollHour(8);
         	p.config.setFullDay(true);
         	p.config.setMultiDay(true);
-        	
+        	//p.views.add(new DHXAgendaView());
+        	//p.extensions.add(DHXExtension.WEEK_AGENDA);
         	p.calendars.attachMiniCalendar();
+        	p.extensions.add(DHXExtension.TOOLTIP);
             //p.setWidth(900);
+        	
+        	/*
+        	DHXBlockTime block = new DHXBlockTime();
+        	block.setDay(DHXDayOfWeek.SUNDAY);
+        	p.timespans.add(block);
+        	
+        	DHXBlockTime block2 = new DHXBlockTime();
+        	block2.setDay(DHXDayOfWeek.SATURDAY);
+        	p.timespans.add(block2);
+        	
+        	*/
+        	
+        	p.toPDF();
+        	
             p.load("../events.html", DHXDataFormat.JSON);
             p.data.dataprocessor.setURL("../events.html");
             ModelAndView mnv = new ModelAndView("article");
@@ -68,6 +86,42 @@ public class HelloController {
     	return evs.run();
             //CustomEventsManager evs = new CustomEventsManager(request);
             //return evs.run();
+    }
+    
+    @RequestMapping("/my/agenda")
+    public ModelAndView scheduler_05(HttpServletRequest request) throws Exception {
+    	DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
+        //p.setInitialDate(2013, 1, 2);
+        p.extensions.add(DHXExtension.RECURRING);
+        //p.config.setScrollHour(8);
+    	p.config.setFullDay(true);
+    	p.config.setMultiDay(true);
+    	p.views.clear();
+    	p.views.add(new DHXAgendaView());
+    	p.setInitialView("agenda");
+    	//p.extensions.add(DHXExtension.WEEK_AGENDA);
+    	//p.calendars.attachMiniCalendar();
+    	
+        //p.setWidth(900);
+    	
+    	/*
+    	DHXBlockTime block = new DHXBlockTime();
+    	block.setDay(DHXDayOfWeek.SUNDAY);
+    	p.timespans.add(block);
+    	
+    	DHXBlockTime block2 = new DHXBlockTime();
+    	block2.setDay(DHXDayOfWeek.SATURDAY);
+    	p.timespans.add(block2);
+    	
+    	*/
+    	
+    	p.toPDF();
+    	
+        p.load("../events.html", DHXDataFormat.JSON);
+        p.data.dataprocessor.setURL("../events.html");
+        ModelAndView mnv = new ModelAndView("article");
+        mnv.addObject("body", p.render());
+        return mnv;
     }
 	
 }
