@@ -6,4 +6,6 @@ public interface CalendarService {
 	
 	SharedCalendar shareCalendar(String sharedBy, String sharedWith);
 
+	boolean isCalendarShared(String user);
+
 }

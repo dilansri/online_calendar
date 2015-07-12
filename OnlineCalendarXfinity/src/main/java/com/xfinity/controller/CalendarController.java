@@ -60,6 +60,9 @@ public class CalendarController {
 		String user= request.getParameter("user");
 		
 		//TODO Check for validity
+		if(!calendarService.isCalendarShared(user)){
+			return new ModelAndView("sharingFailure");
+		}
 		
 		//User sharedUser = userService.getUser(user);
 		
