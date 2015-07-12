@@ -1,5 +1,7 @@
 package com.xfinity.controller;
 
+import java.sql.Date;
+
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +21,7 @@ import com.dhtmlx.planner.DHXSkin;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.EventManager;
+import com.xfinity.model.Event;
 import com.xfinity.model.User;
 import com.xfinity.service.CalendarService;
 import com.xfinity.service.EventService;
@@ -34,6 +37,12 @@ public class CalendarController {
 	
 	@Autowired
 	EventService eventService;
+	
+	@RequestMapping(value="/my/share")
+	public String sayHello(Model model){
+				
+		return "shareCalendar";
+	}	
 	
 	@RequestMapping(value="/my/shareCalendar",method=RequestMethod.POST)
 	public ModelAndView shareUserCalendar(WebRequest request, Model model){
@@ -72,7 +81,7 @@ public class CalendarController {
     	p.config.setFullDay(true);
     	p.config.setMultiDay(true);
     	p.config.setShowLoading(true);
-    	p.config.setReadonly(true);
+    	//p.config.setReadonly(true);
     	p.config.setReadonlyForm(true);
     	
     	p.extensions.add(DHXExtension.TOOLTIP);
