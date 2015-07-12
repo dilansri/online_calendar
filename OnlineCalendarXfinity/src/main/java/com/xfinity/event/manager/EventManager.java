@@ -25,15 +25,12 @@ public class EventManager extends DHXEventsManager {
 	private User user;
 	
 
-	public EventManager(HttpServletRequest request,EventService service,UserService uService) {
+	public EventManager(HttpServletRequest request,EventService service,UserService uService,User usr) {
 		super(request);
 		eventService = service;
 		userService = uService;
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String username = auth.getName(); //get logged in username
-		
-	    user = userService.getUser(username);
+	    user = usr;
 	}
 	
 	@Override

@@ -5,6 +5,8 @@ import java.sql.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dhtmlx.planner.DHXPlanner;
 import com.dhtmlx.planner.DHXSkin;
-import com.dhtmlx.planner.api.DHXBlockTime;
-import com.dhtmlx.planner.api.DHXTimeSpan.DHXDayOfWeek;
 import com.dhtmlx.planner.controls.DHXAgendaView;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.EventManager;
 import com.xfinity.model.Event;
+import com.xfinity.model.User;
 import com.xfinity.service.EventService;
 import com.xfinity.service.UserService;
 
@@ -82,7 +83,13 @@ public class HelloController {
     @ResponseBody public String events(HttpServletRequest request) {
             //EventsManager evs = new EventsManager(request);
             //return evs.run();
-    	EventManager evs = new EventManager(request,eventService,userService);
+    	
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+		
+	    User user = userService.getUser(username);
+	    
+    	EventManager evs = new EventManager(request,eventService,userService,user);
     	return evs.run();
             //CustomEventsManager evs = new CustomEventsManager(request);
             //return evs.run();
