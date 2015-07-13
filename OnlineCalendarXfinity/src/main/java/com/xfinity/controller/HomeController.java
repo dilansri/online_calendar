@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	@RequestMapping(method=RequestMethod.GET)	
-	public String index(Model model){		
+	public String index(Model model){	
 		
-		if(SecurityContextHolder.getContext().getAuthentication() != null &&
-				SecurityContextHolder.getContext().getAuthentication().isAuthenticated())	{
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		if(!username.trim().equals("anonymousUser"))	{
 			return "redirect:/my/planner";
 		}
-		model.addAttribute("greeting","HELLO WORLDss From Home");
 		return "hello";
 	}	
 

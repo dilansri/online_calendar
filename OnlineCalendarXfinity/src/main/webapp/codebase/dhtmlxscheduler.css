@@ -1336,7 +1336,14 @@ div.icon_delete{
 .dhx_time_block {
 	position:absolute;
 	width:100%;
-	background:silver;
+	/*silver*/
+	background:repeating-linear-gradient(
+			  -55deg,
+			  #222,
+			  #222 10px,
+			  #333 10px,
+			  #333 20px
+			);
 	opacity:0.4;
 	filter:alpha(opacity=40);
 	z-index:1;
