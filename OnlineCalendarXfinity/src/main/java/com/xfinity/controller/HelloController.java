@@ -1,6 +1,7 @@
 package com.xfinity.controller;
 
 import java.sql.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,6 +34,13 @@ public class HelloController {
 	@Autowired
 	UserService userService;
 	
+	@RequestMapping(value="/")
+	public String homeS(Model model){
+		model.addAttribute("greeting","HELLO WORLDss");	
+		return "hello";
+	}	
+	
+	
 	@RequestMapping(value="/greeting")
 	public String sayHello(Model model){
 		model.addAttribute("greeting","HELLO WORLDss");
@@ -45,9 +53,16 @@ public class HelloController {
 		return "hello";
 	}	
 	
-	@RequestMapping("/my/planner.html")
+	@RequestMapping("/my/planner")
     public ModelAndView planner(HttpServletRequest request) throws Exception {
             DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
+            
+            String params = "";
+            
+            String recurringFilter = request.getParameter("hideRecur");
+            if(recurringFilter != null && recurringFilter.equals("yes")){
+            	params += "hideRecur=yes&";
+            }
             //p.setInitialDate(2013, 1, 2);
             p.extensions.add(DHXExtension.RECURRING);
             //p.config.setScrollHour(8);
@@ -57,6 +72,7 @@ public class HelloController {
         	//p.extensions.add(DHXExtension.WEEK_AGENDA);
         	p.calendars.attachMiniCalendar();
         	p.extensions.add(DHXExtension.TOOLTIP);
+        	p.setInitialView("month");
             //p.setWidth(900);
         	
         	/*
@@ -72,24 +88,31 @@ public class HelloController {
         	
         	p.toPDF();
         	
-            p.load("../events.html", DHXDataFormat.JSON);
-            p.data.dataprocessor.setURL("../events.html");
+            p.load("../my/events?"+params, DHXDataFormat.JSON);
+            p.data.dataprocessor.setURL("../my/events");
             ModelAndView mnv = new ModelAndView("article");
             mnv.addObject("body", p.render());
             return mnv;
     }
 
-    @RequestMapping("/events")
+    @RequestMapping("/my/events")
     @ResponseBody public String events(HttpServletRequest request) {
             //EventsManager evs = new EventsManager(request);
             //return evs.run();
     	
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    String username = auth.getName(); //get logged in username
-		
-	    User user = userService.getUser(username);
+	    String username = auth.getName();		
+	    User user = userService.getUser(username);	    
 	    
-    	EventManager evs = new EventManager(request,eventService,userService,user);
+	    String recurringFilter = request.getParameter("hideRecur");
+	    
+	    HashMap<String, String> options = new HashMap<String,String>();
+	    
+	    if(recurringFilter != null && recurringFilter.equals("yes")){
+	    	options.put("hideRecur", "yes");
+	    }
+	    
+    	EventManager evs = new EventManager(request,eventService,userService,user,options);
     	return evs.run();
             //CustomEventsManager evs = new CustomEventsManager(request);
             //return evs.run();
@@ -124,8 +147,8 @@ public class HelloController {
     	
     	p.toPDF();
     	
-        p.load("../events.html", DHXDataFormat.JSON);
-        p.data.dataprocessor.setURL("../events.html");
+        p.load("../my/events", DHXDataFormat.JSON);
+        p.data.dataprocessor.setURL("../my/events");
         ModelAndView mnv = new ModelAndView("article");
         mnv.addObject("body", p.render());
         return mnv;

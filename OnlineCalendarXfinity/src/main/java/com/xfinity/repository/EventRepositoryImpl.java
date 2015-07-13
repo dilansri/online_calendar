@@ -1,5 +1,6 @@
 package com.xfinity.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -42,6 +43,25 @@ public class EventRepositoryImpl implements EventRepository {
 		em.persist(em.contains(ev) ? ev : em.merge(ev));
 		em.flush();
 		
+	}
+
+	public List<Event> load(String username, HashMap<String, String> options) {
+		
+		String andConditions ="";
+		
+		if(options.containsKey("hideRecur") && options.get("hideRecur").equals("yes")){			
+			andConditions += " and rec_type=''";
+			
+		}
+		
+		Query query = em.createQuery("from Event where username=?"+andConditions)
+							.setParameter(1, username);	
+		
+		List events = query.getResultList();
+		
+		
+		
+		return events;
 	}
 
 }

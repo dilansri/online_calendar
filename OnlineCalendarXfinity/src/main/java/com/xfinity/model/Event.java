@@ -38,8 +38,7 @@ public class Event extends DHXEventRec {
 		c.setTime(start_date);
 		
 		int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-		
-				
+			
 		switch (dayOfWeek) {
 		case Calendar.SUNDAY:
 			this.color = "Red";
@@ -72,6 +71,11 @@ public class Event extends DHXEventRec {
 
 		default:
 			break;
+		}
+		
+		if(!rec_type.trim().equals("")){
+			this.color = "magenta";
+			this.textColor = "white";
 		}
 	}
 

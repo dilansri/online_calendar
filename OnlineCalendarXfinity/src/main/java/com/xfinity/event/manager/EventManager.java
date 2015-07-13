@@ -1,5 +1,6 @@
 package com.xfinity.event.manager;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +25,14 @@ public class EventManager extends DHXEventsManager {
 	
 	private User user;
 	
+	HashMap<String, String> options;
+	
 
-	public EventManager(HttpServletRequest request,EventService service,UserService uService,User usr) {
+	public EventManager(HttpServletRequest request,EventService service,UserService uService,User usr,HashMap<String, String> opt) {
 		super(request);
 		eventService = service;
 		userService = uService;
-		
+		options = opt;
 	    user = usr;
 	}
 	
@@ -41,7 +44,9 @@ public class EventManager extends DHXEventsManager {
 	
 	@Override
     public Iterable getEvents() {
-		List<Event> events = eventService.findAllEvents(user.getUsername());
+		List<Event> events = eventService.findAllEvents(user.getUsername(),options);
+		
+		
 		return events;
 	}
 	

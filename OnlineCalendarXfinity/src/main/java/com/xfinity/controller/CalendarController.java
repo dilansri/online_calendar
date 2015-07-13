@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dhtmlx.planner.DHXPlanner;
 import com.dhtmlx.planner.DHXSkin;
+import com.dhtmlx.planner.api.DHXEventBox;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.SharedEventManager;
@@ -120,7 +121,7 @@ public class CalendarController {
             
     }
 	
-	@RequestMapping("/my/teamCalendar.html")
+	@RequestMapping("/my/teamCalendar")
 	public ModelAndView teamCalendar(WebRequest request, Model model) throws Exception{ 
 		
 		DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
@@ -133,6 +134,16 @@ public class CalendarController {
     	//p.extensions.add(DHXExtension.WEEK_AGENDA);
     	p.calendars.attachMiniCalendar();
     	p.extensions.add(DHXExtension.TOOLTIP);
+    	
+    	DHXEventBox ev = new DHXEventBox();
+    	ev.setTemplate("<div class='custom_event' style='background-color:#1796B0; opacity:0.7; padding:10px;'>"+
+    	          "<span class='event_date'>{start_date:date(%H:%i)}</span> - "+
+    	          "<span class='event_date'>{end_date:date(%H:%i)}</span><br>"+
+    	          "<span><b>{text}</b></span><br>"+
+    	          "</div>"+
+    	          "</div>");
+    	ev.setCssClass("custom_event");
+    	p.templates.setEventBox(ev);
     	
     	/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();*/
@@ -153,15 +164,15 @@ public class CalendarController {
     	
     	p.toPDF();
     	
-        p.load("../teamEvents.html", DHXDataFormat.JSON);
-        p.data.dataprocessor.setURL("../teamEvents.html");
+        p.load("../my/teamEvents", DHXDataFormat.JSON);
+        p.data.dataprocessor.setURL("../my/teamEvents");
 		
 		ModelAndView mnv = new ModelAndView("article");
 		mnv.addObject("body", p.render());
         return mnv;	
 	}
 	
-	@RequestMapping("/teamEvents")
+	@RequestMapping("/my/teamEvents")
     @ResponseBody public String teamEvents(HttpServletRequest request) { 
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

@@ -65,8 +65,6 @@ public class TeamEventManager extends DHXEventsManager {
 		    	return DHXStatus.ERROR;
 		    }
 	    	
-	    }else if(status == DHXStatus.INSERT){
-	    	ev.setText(ev.getText()+ " by: " + currentUser);	    	
 	    }
 	    
 	    ev.setUser(user);

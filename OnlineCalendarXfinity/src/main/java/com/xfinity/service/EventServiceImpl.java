@@ -1,5 +1,6 @@
 package com.xfinity.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,12 @@ public class EventServiceImpl implements EventService {
 	public void delete(Event ev) {
 		eventRepository.delete(ev);
 		
+	}
+
+	public List<Event> findAllEvents(String username,
+			HashMap<String, String> options) {
+		
+		return eventRepository.load(username,options);
 	}
 
 }

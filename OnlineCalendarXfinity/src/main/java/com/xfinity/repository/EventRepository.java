@@ -1,5 +1,6 @@
 package com.xfinity.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.xfinity.model.Event;
@@ -13,4 +14,6 @@ public interface EventRepository {
 	void delete(Event ev);
 
 	void update(Event ev);
+
+	List<Event> load(String username, HashMap<String, String> options);
 }

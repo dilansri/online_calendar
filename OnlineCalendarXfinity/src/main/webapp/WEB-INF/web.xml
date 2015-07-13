@@ -24,8 +24,10 @@
    
    <servlet-mapping>
    		<servlet-name>onlineCalendarServlet</servlet-name>
-   		<url-pattern>*.html</url-pattern>
+   		<url-pattern>/</url-pattern>
+   		
    </servlet-mapping>
+   
    
   <display-name>Archetype Created Web Application</display-name>
 </web-app>

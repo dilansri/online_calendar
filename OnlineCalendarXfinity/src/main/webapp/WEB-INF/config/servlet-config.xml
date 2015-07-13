@@ -14,5 +14,7 @@
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/jsp/" 
 	p:suffix=".jsp"></bean>
+	
+	<mvc:resources mapping="/codebase/**" location="/codebase/" />
 
 </beans>
