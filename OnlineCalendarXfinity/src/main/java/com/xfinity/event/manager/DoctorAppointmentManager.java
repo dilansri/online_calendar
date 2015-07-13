@@ -42,7 +42,7 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 		
 		for(DoctorAppointment appointment : appointments){
 			if(!appointment.getUser().getUsername().equals(currentUser)){
-				appointment.setText("Booked by someone");
+				appointment.setText("Booked");
 			}
 		}
 		return appointments;

@@ -21,6 +21,7 @@ import com.dhtmlx.planner.DHXSkin;
 import com.dhtmlx.planner.api.DHXBlockTime;
 import com.dhtmlx.planner.api.DHXEventBox;
 import com.dhtmlx.planner.api.DHXTimeSpan.DHXDayOfWeek;
+import com.dhtmlx.planner.api.DHXZone;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.DoctorAppointmentManager;
@@ -223,7 +224,16 @@ public class CalendarController {
     	saturdayBlock.setDay(DHXDayOfWeek.SATURDAY);
     	p.timespans.add(saturdayBlock);
     	
+    	DHXBlockTime weekdayBlockMorning = new DHXBlockTime();
+    	weekdayBlockMorning.setDays(DHXDayOfWeek.MONDAY,DHXDayOfWeek.TUESDAY,DHXDayOfWeek.WEDNESDAY,DHXDayOfWeek.THURSDAY,DHXDayOfWeek.FRIDAY);
+    	weekdayBlockMorning.addZone(new DHXZone(0,540));
+    	p.timespans.add(weekdayBlockMorning);
     	
+    	
+    	DHXBlockTime weekdayBlockEvening = new DHXBlockTime();
+    	weekdayBlockEvening.setDays(DHXDayOfWeek.MONDAY,DHXDayOfWeek.TUESDAY,DHXDayOfWeek.WEDNESDAY,DHXDayOfWeek.THURSDAY,DHXDayOfWeek.FRIDAY);
+    	weekdayBlockEvening.addZone(new DHXZone(1200,1440));
+    	p.timespans.add(weekdayBlockEvening);
     	
     	p.toPDF();
     	
