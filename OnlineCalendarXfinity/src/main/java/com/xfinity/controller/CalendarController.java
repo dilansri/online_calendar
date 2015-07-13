@@ -18,13 +18,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dhtmlx.planner.DHXPlanner;
 import com.dhtmlx.planner.DHXSkin;
+import com.dhtmlx.planner.api.DHXBlockTime;
 import com.dhtmlx.planner.api.DHXEventBox;
+import com.dhtmlx.planner.api.DHXTimeSpan.DHXDayOfWeek;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
+import com.xfinity.event.manager.DoctorAppointmentManager;
 import com.xfinity.event.manager.SharedEventManager;
 import com.xfinity.event.manager.TeamEventManager;
 import com.xfinity.model.User;
 import com.xfinity.service.CalendarService;
+import com.xfinity.service.DoctorAppointmentService;
 import com.xfinity.service.EventService;
 import com.xfinity.service.TeamEventService;
 import com.xfinity.service.UserService;
@@ -42,6 +46,9 @@ public class CalendarController {
 	
 	@Autowired
 	TeamEventService teamEventService;
+	
+	@Autowired
+	DoctorAppointmentService doctorAppointmentService;
 	
 	@RequestMapping(value="/my/share")
 	public ModelAndView share(HttpServletRequest request){
@@ -184,4 +191,61 @@ public class CalendarController {
     	return evs.run();
             
     }
+	
+	@RequestMapping("/my/doctorCalendar")
+	public ModelAndView doctorCalendar(WebRequest request, Model model) throws Exception{ 
+		
+		DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
+        //p.setInitialDate(2013, 1, 2);
+        //p.extensions.add(DHXExtension.RECURRING);
+        //p.config.setScrollHour(8);
+    	p.config.setFullDay(true);
+    	p.config.setMultiDay(true);
+    	//p.views.add(new DHXAgendaView());
+    	//p.extensions.add(DHXExtension.WEEK_AGENDA);
+    	p.calendars.attachMiniCalendar();
+    	p.extensions.add(DHXExtension.TOOLTIP);
+    	
+    	/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();*/
+	    
+    	p.templates.setEventText("Appointment: {text}");
+        //p.setWidth(900);
+    	
+    	
+    	
+    	//Blocking week ends
+    	DHXBlockTime sundayBlock = new DHXBlockTime();
+    	sundayBlock.setDay(DHXDayOfWeek.SUNDAY);
+    	p.timespans.add(sundayBlock);
+    	
+    	DHXBlockTime saturdayBlock = new DHXBlockTime();
+    	saturdayBlock.setDay(DHXDayOfWeek.SATURDAY);
+    	p.timespans.add(saturdayBlock);
+    	
+    	
+    	
+    	p.toPDF();
+    	
+        p.load("../my/doctorEvents", DHXDataFormat.JSON);
+        p.data.dataprocessor.setURL("../my/doctorEvents");
+		
+		ModelAndView mnv = new ModelAndView("article");
+		mnv.addObject("body", p.render());
+        return mnv;	
+	}
+	
+	@RequestMapping("/my/doctorEvents")
+    @ResponseBody public String doctorEvents(HttpServletRequest request) { 
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName(); //get logged in username
+		
+	    User user = userService.getUser(username);
+	    
+	    DoctorAppointmentManager evs = new DoctorAppointmentManager(request,doctorAppointmentService,user);
+    	return evs.run();
+            
+    }
+	
 }
