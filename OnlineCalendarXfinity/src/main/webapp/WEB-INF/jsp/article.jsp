@@ -10,7 +10,7 @@
     	<header id="header">
 
 				<!-- Logo -->
-					<h1 id="">Xfinity Calendar</h1>
+					<h1 id="logo">Xfinity Calendar</h1>
 
 				<!-- Nav -->
 					<nav id="nav">

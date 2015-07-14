@@ -16,6 +16,7 @@
 	p:suffix=".jsp"></bean>
 	
 	<mvc:resources mapping="/codebase/**" location="/codebase/" />
+	<mvc:resources mapping="/codebase_common/**" location="/codebase_common/" />
 	<mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" />
 	<mvc:resources mapping="/images/**" location="/WEB-INF/images/" />
 	

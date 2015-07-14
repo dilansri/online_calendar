@@ -132,7 +132,7 @@ public class CalendarController {
 	@RequestMapping("/my/teamCalendar")
 	public ModelAndView teamCalendar(WebRequest request, Model model) throws Exception{ 
 		
-		DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
+		DHXPlanner p = new DHXPlanner("../codebase_common/", DHXSkin.TERRACE);
         //p.setInitialDate(2013, 1, 2);
         //p.extensions.add(DHXExtension.RECURRING);
         //p.config.setScrollHour(8);
@@ -196,7 +196,7 @@ public class CalendarController {
 	@RequestMapping("/my/doctorCalendar")
 	public ModelAndView doctorCalendar(WebRequest request, Model model) throws Exception{ 
 		
-		DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
+		DHXPlanner p = new DHXPlanner("../codebase_common/", DHXSkin.TERRACE);
         //p.setInitialDate(2013, 1, 2);
         //p.extensions.add(DHXExtension.RECURRING);
         //p.config.setScrollHour(8);
@@ -213,7 +213,9 @@ public class CalendarController {
     	p.templates.setEventText("Appointment: {text}");
         //p.setWidth(900);
     	
-    	
+    	p.config.setDragMove(false);
+    	p.config.setDragResize(false);
+    	p.config.setDetailsOnCreate(true);
     	
     	//Blocking week ends
     	DHXBlockTime sundayBlock = new DHXBlockTime();

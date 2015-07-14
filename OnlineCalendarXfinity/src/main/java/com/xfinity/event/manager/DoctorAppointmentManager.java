@@ -53,7 +53,6 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 		//eventService.save(event);
 		DoctorAppointment appointment = (DoctorAppointment)event;
 		appointment.setColor();
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String currentUser = auth.getName(); 
 	    

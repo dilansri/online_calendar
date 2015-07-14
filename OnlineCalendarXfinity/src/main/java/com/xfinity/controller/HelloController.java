@@ -72,7 +72,9 @@ public class HelloController {
         	//p.extensions.add(DHXExtension.WEEK_AGENDA);
         	p.calendars.attachMiniCalendar();
         	p.extensions.add(DHXExtension.TOOLTIP);
-        	p.setInitialView("month");
+        	//p.setInitialView("month");
+        	p.config.setDetailsOnCreate(true);
+        	p.config.setDetailsOnDblClick(true);
             //p.setWidth(900);
         	
         	/*
