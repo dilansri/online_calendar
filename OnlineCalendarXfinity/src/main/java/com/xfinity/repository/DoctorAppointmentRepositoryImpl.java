@@ -58,4 +58,16 @@ public class DoctorAppointmentRepositoryImpl implements
 		return null;
 	}
 
+	public boolean isValid(DoctorAppointment appointment) {
+		Query query = em.createQuery("from DoctorAppointment where (start_date <= :startDate and end_date >= :startDate) or (start_date <= :endDate and end_date >= :endDate) or (start_date >= :startDate and end_date <= :endDate) ")
+						.setParameter("startDate", appointment.getStart_date())
+						.setParameter("endDate", appointment.getEnd_date());
+		List<DoctorAppointment> appointments = new ArrayList<DoctorAppointment>();
+		appointments = query.getResultList();
+		if(appointments.size() > 0 ){
+			return false;
+		}
+		return true;
+	}
+
 }

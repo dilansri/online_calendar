@@ -38,4 +38,8 @@ public class DoctorAppointmentServiceImpl implements DoctorAppointmentService {
 		return doctorAppointmentRepository.getUsername(appointmentId);
 	}
 
+	public boolean isValid(DoctorAppointment appointment) {
+		return doctorAppointmentRepository.isValid(appointment);
+	}
+
 }

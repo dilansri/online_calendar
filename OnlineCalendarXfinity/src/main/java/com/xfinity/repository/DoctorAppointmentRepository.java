@@ -16,4 +16,6 @@ public interface DoctorAppointmentRepository {
 
 	String getUsername(int appointmentId);
 
+	boolean isValid(DoctorAppointment appointment);
+
 }

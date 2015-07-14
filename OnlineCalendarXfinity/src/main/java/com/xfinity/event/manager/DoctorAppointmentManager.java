@@ -57,7 +57,14 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String currentUser = auth.getName(); 
 	    
-	    if (status == DHXStatus.UPDATE || status == DHXStatus.DELETE){
+	    if(status == DHXStatus.INSERT){
+	    	
+	    	//CHECK For overlaps
+	    	if(!doctorAppointmentService.isValid(appointment)){
+	    		return DHXStatus.ERROR;
+	    	}
+	    	
+	    }else if (status == DHXStatus.UPDATE || status == DHXStatus.DELETE){
 	    	int appointmentId = appointment.getId();	    	
 	    	String eventUser = doctorAppointmentService.getUsername(appointmentId);
 		    

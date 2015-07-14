@@ -17,4 +17,6 @@ public interface DoctorAppointmentService {
 
 	String getUsername(int appointmentId);
 
+	boolean isValid(DoctorAppointment appointment);
+
 }
