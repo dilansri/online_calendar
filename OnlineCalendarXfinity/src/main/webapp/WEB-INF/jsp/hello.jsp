@@ -16,8 +16,8 @@
 				Use Xfinity Calendar to keep track of all special occasions.</p>
 					<ul class="actions">
 						<li><a href="#one" class="button icon fa-chevron-down scrolly">Learn More</a></li>
-						<li><a href="login/" class="button special icon fa-download">Login</a></li>
-						<li><a href="register/" class="button special">Register</a></li>
+						<li><a href="./login" class="button special icon fa-download">Login</a></li>
+						<li><a href="./register" class="button special">Register</a></li>
 					</ul>
 				</div>
 				<div class="image"><div class="inner"><img src="images/screen.jpg" alt="" /></div></div>
@@ -87,8 +87,8 @@
 				Use Xfinity Calendar to keep track of all special occasions.</p>
 				</header>
 				<ul class="actions">
-					<li><a href="login/" class="button special icon fa-download">Login</a></li>
-					<li><a href="register/" class="button special">Register</a></li>
+					<li><a href="./login" class="button special icon fa-download">Login</a></li>
+					<li><a href="./register" class="button special">Register</a></li>
 				</ul>
 			</section>
 

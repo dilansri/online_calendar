@@ -11,17 +11,21 @@ import com.dhtmlx.planner.DHXEv;
 import com.dhtmlx.planner.DHXEventsManager;
 import com.dhtmlx.planner.DHXStatus;
 import com.xfinity.model.DoctorAppointment;
+import com.xfinity.model.Event;
 import com.xfinity.model.User;
 import com.xfinity.service.DoctorAppointmentService;
+import com.xfinity.service.EventService;
 
 public class DoctorAppointmentManager extends DHXEventsManager {
 	
 	private DoctorAppointmentService doctorAppointmentService;
 	private User user;
+	private EventService eventService;
 	
-	public DoctorAppointmentManager(HttpServletRequest request,DoctorAppointmentService service,User usr) {
+	public DoctorAppointmentManager(HttpServletRequest request,DoctorAppointmentService service,EventService eService,User usr) {
 		super(request);
 		doctorAppointmentService = service;
+		eventService = eService;
 		user = usr;
 	}
 	
@@ -75,10 +79,17 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 	    
 	    appointment.setUser(user);
 	    
+	    Event personalEvent = new Event();
+	    personalEvent.setStart_date(appointment.getStart_date());
+	    personalEvent.setEnd_date(appointment.getEnd_date());
+	    personalEvent.setText("See Doctor :"+appointment.getText());
+	    personalEvent.setColor();
+	    personalEvent.setUser(user);
 		//ev.setColor("orange");	    
 	    //ev.setUser(user);
 		if (status == DHXStatus.INSERT){
 			doctorAppointmentService.save(appointment);
+			eventService.save(personalEvent);
 		}else if (status == DHXStatus.UPDATE){
 			doctorAppointmentService.update(appointment);
 		}else if(status == DHXStatus.DELETE){

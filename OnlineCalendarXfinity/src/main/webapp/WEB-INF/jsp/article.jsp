@@ -15,10 +15,10 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="#Planner">Planner</a></li>
-							<li><a href="#Agenda">Agenda</a></li>
-							<li><a href="#Team Calendar">Team Calendar</a></li>
-							<li><a href="#Shared Calendar">Shared Calendar</a></li>
+							<li><a href="./planner">Planner</a></li>
+							<li><a href="./agenda">Agenda</a></li>
+							<li><a href="./teamCalendar">Team Calendar</a></li>
+							<li><a href="./share">Share Calendar</a></li>
 							
 							<li><a href="#Logout">Logout</a></li>
 						</ul>

@@ -10,19 +10,23 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.dhtmlx.planner.DHXEv;
 import com.dhtmlx.planner.DHXEventsManager;
 import com.dhtmlx.planner.DHXStatus;
+import com.xfinity.model.Event;
 import com.xfinity.model.TeamEvent;
 import com.xfinity.model.User;
+import com.xfinity.service.EventService;
 import com.xfinity.service.TeamEventService;
 
 public class TeamEventManager extends DHXEventsManager {
 	
 	private TeamEventService teamEventService;
 	private User user;
+	private EventService eventService;
 	
-	public TeamEventManager(HttpServletRequest request,TeamEventService service,User usr) {
+	public TeamEventManager(HttpServletRequest request,TeamEventService service,EventService eService,User usr) {
 		super(request);
 		teamEventService = service;
 		user = usr;
+		eventService = eService;
 	}
 	
 	
@@ -69,10 +73,19 @@ public class TeamEventManager extends DHXEventsManager {
 	    
 	    ev.setUser(user);
 	    
+	    Event teamEvent = new Event();
+	    teamEvent.setStart_date(ev.getStart_date());
+	    teamEvent.setEnd_date(ev.getEnd_date());
+	    teamEvent.setText("Team Event :"+ev.getText());
+	    teamEvent.setColor();
+	    teamEvent.setUser(user);
+	    
+	    
 		//ev.setColor("orange");	    
 	    //ev.setUser(user);
 		if (status == DHXStatus.INSERT){
 			teamEventService.save(ev);
+			eventService.save(teamEvent);
 		}else if (status == DHXStatus.UPDATE){
 			teamEventService.update(ev);
 		}else if(status == DHXStatus.DELETE){

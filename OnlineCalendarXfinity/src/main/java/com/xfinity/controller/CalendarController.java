@@ -142,8 +142,9 @@ public class CalendarController {
     	//p.extensions.add(DHXExtension.WEEK_AGENDA);
     	p.calendars.attachMiniCalendar();
     	p.extensions.add(DHXExtension.TOOLTIP);
-    	
-    	DHXEventBox ev = new DHXEventBox();
+    	p.config.setDetailsOnCreate(true);
+    	p.config.setDetailsOnDblClick(true);
+    	/*DHXEventBox ev = new DHXEventBox();
     	ev.setTemplate("<div class='custom_event' style='background-color:#1796B0; opacity:0.7; padding:10px;'>"+
     	          "<span class='event_date'>{start_date:date(%H:%i)}</span> - "+
     	          "<span class='event_date'>{end_date:date(%H:%i)}</span><br>"+
@@ -151,7 +152,7 @@ public class CalendarController {
     	          "</div>"+
     	          "</div>");
     	ev.setCssClass("custom_event");
-    	p.templates.setEventBox(ev);
+    	p.templates.setEventBox(ev);*/
     	
     	/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();*/
@@ -188,7 +189,7 @@ public class CalendarController {
 		
 	    User user = userService.getUser(username);
 	    
-    	TeamEventManager evs = new TeamEventManager(request,teamEventService,user);
+    	TeamEventManager evs = new TeamEventManager(request,teamEventService,eventService,user);
     	return evs.run();
             
     }
@@ -216,6 +217,9 @@ public class CalendarController {
     	p.config.setDragMove(false);
     	p.config.setDragResize(false);
     	p.config.setDetailsOnCreate(true);
+    	p.config.setDetailsOnDblClick(true);
+    	
+    	
     	
     	//Blocking week ends
     	DHXBlockTime sundayBlock = new DHXBlockTime();
@@ -255,7 +259,7 @@ public class CalendarController {
 		
 	    User user = userService.getUser(username);
 	    
-	    DoctorAppointmentManager evs = new DoctorAppointmentManager(request,doctorAppointmentService,user);
+	    DoctorAppointmentManager evs = new DoctorAppointmentManager(request,doctorAppointmentService,eventService,user);
     	return evs.run();
             
     }

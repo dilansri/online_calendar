@@ -1,5 +1,6 @@
 package com.xfinity.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class DoctorAppointmentServiceImpl implements DoctorAppointmentService {
 	
 	@Autowired
 	private DoctorAppointmentRepository doctorAppointmentRepository;
+	
+	private int max_allowed_hours = 2;
+	private int min_allowed_minutes = 15;
 	
 	@Transactional
 	public DoctorAppointment save(DoctorAppointment appointment) {
@@ -39,7 +43,20 @@ public class DoctorAppointmentServiceImpl implements DoctorAppointmentService {
 	}
 
 	public boolean isValid(DoctorAppointment appointment) {
-		return doctorAppointmentRepository.isValid(appointment);
+		if(doctorAppointmentRepository.isValid(appointment) && getMinutes(appointment) < max_allowed_hours * 60 && getMinutes(appointment) > min_allowed_minutes){
+			return true;
+		}
+		
+		return false;
+	}
+
+	private int getMinutes(DoctorAppointment appointment) {
+		Date startTime = appointment.getStart_date();
+		Date endTime = appointment.getEnd_date();
+		
+		long diff = endTime.getTime() - startTime.getTime();
+		long minutes = diff/(1000*60);		
+		return (int)minutes;
 	}
 
 }
