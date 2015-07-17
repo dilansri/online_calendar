@@ -77,8 +77,9 @@ public class TeamEventManager extends DHXEventsManager {
 	    teamEvent.setStart_date(ev.getStart_date());
 	    teamEvent.setEnd_date(ev.getEnd_date());
 	    teamEvent.setText("Team Event :"+ev.getText());
-	    teamEvent.setColor();
 	    teamEvent.setUser(user);
+	    teamEvent.setColor();
+	    
 	    
 	    
 		//ev.setColor("orange");	    

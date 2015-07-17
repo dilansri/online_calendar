@@ -96,11 +96,13 @@ public class UserController {
 		return mnv;
 	}
 	
+	
+	
 	 private User getUser() {
 	    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		    String username = auth.getName();		
 		    User user = userService.getUser(username);
 		    return user;
-		}
+	}
 
 }
