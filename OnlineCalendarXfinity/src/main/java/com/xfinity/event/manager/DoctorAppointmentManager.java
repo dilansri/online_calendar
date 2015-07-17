@@ -83,8 +83,9 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 	    personalEvent.setStart_date(appointment.getStart_date());
 	    personalEvent.setEnd_date(appointment.getEnd_date());
 	    personalEvent.setText("See Doctor :"+appointment.getText());
-	    personalEvent.setColor();
 	    personalEvent.setUser(user);
+	    personalEvent.setColor();
+	    
 		//ev.setColor("orange");	    
 	    //ev.setUser(user);
 		if (status == DHXStatus.INSERT){

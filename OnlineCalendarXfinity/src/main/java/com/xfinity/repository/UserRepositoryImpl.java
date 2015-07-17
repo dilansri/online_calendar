@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.xfinity.model.User;
+import com.xfinity.model.UserPreference;
 
 @Repository("userRepository")
 public class UserRepositoryImpl implements UserRepository {
@@ -37,6 +38,12 @@ public class UserRepositoryImpl implements UserRepository {
 		} else {
 			return null;
 		}
+	}
+
+	public UserPreference savePreference(UserPreference userPreference) {
+		em.persist(em.contains(userPreference) ? userPreference : em.merge(userPreference));
+		em.flush();
+		return userPreference;
 	}
 
 }

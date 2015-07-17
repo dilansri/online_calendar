@@ -41,32 +41,32 @@ public class Event extends DHXEventRec {
 			
 		switch (dayOfWeek) {
 		case Calendar.SUNDAY:
-			this.color = "Red";
-			this.textColor = "white";
+			this.color = user.getUserPreference().getSundayColor();
+			this.textColor = user.getUserPreference().getSundayTextColor();
 			break;
 		case Calendar.MONDAY:
-			this.color = "brown";
-			this.textColor = "white";
+			this.color = user.getUserPreference().getMondayColor();
+			this.textColor = user.getUserPreference().getMondayTextColor();
 			break;
 		case Calendar.TUESDAY:
-			this.color = "blue";
-			this.textColor = "white";
+			this.color = user.getUserPreference().getTuesdayColor();
+			this.textColor = user.getUserPreference().getTuesdayTextColor();
 			break;
 		case Calendar.WEDNESDAY:
-			this.color = "green";
-			this.textColor = "white";
+			this.color = user.getUserPreference().getWednesdayColor();
+			this.textColor = user.getUserPreference().getWednesdayTextColor();
 			break;
 		case Calendar.THURSDAY:
-			this.color = "orange";
-			this.textColor = "white";
+			this.color = user.getUserPreference().getThursdayColor();
+			this.textColor = user.getUserPreference().getThursdayTextColor();
 			break;
 		case Calendar.FRIDAY:
-			this.color = "purple";
-			this.textColor = "white";
+			this.color = user.getUserPreference().getFridayColor();
+			this.textColor = user.getUserPreference().getFridayTextColor();
 			break;
 		case Calendar.SATURDAY:
-			this.color = "grey";
-			this.textColor = "white";
+			this.color = user.getUserPreference().getSaturdayColor();
+			this.textColor = user.getUserPreference().getSaturdayTextColor();
 			break;
 
 		default:
@@ -74,8 +74,8 @@ public class Event extends DHXEventRec {
 		}
 		
 		if(!rec_type.trim().equals("")){
-			this.color = "magenta";
-			this.textColor = "white";
+			this.color = user.getUserPreference().getRecurringColor();
+			this.textColor = user.getUserPreference().getRecurringTextColor();
 		}
 	}
 

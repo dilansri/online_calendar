@@ -54,9 +54,10 @@ public class EventManager extends DHXEventsManager {
 	public DHXStatus saveEvent(DHXEv event, DHXStatus status) {
 		//eventService.save(event);
 		Event ev = (Event)event;
-		ev.setColor();
+		
 		//ev.setColor("orange");	    
 	    ev.setUser(user);
+	    ev.setColor();
 		if (status == DHXStatus.INSERT){
 			eventService.save(ev);
 		}else if (status == DHXStatus.UPDATE){

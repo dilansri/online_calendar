@@ -2,11 +2,14 @@ package com.xfinity.model;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
  
 @Entity
@@ -17,6 +20,8 @@ public class User {
 	private String password;
 	private boolean enabled;
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+	
+	private UserPreference userPreference;
  
 	public User() {
 	}
@@ -72,6 +77,15 @@ public class User {
  
 	public void setUserRole(Set<UserRole> userRole) {
 		this.userRole = userRole;
+	}
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	public UserPreference getUserPreference() {
+		return userPreference;
+	}
+
+	public void setUserPreference(UserPreference userPreference) {
+		this.userPreference = userPreference;
 	}
  
 }

@@ -22,6 +22,7 @@ import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.EventManager;
 import com.xfinity.model.Event;
 import com.xfinity.model.User;
+import com.xfinity.model.UserPreference;
 import com.xfinity.service.EventService;
 import com.xfinity.service.UserService;
 
@@ -54,8 +55,9 @@ public class HelloController {
 	}	
 	
 	@RequestMapping("/my/planner")
-    public ModelAndView planner(HttpServletRequest request) throws Exception {
-            DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
+    public ModelAndView planner(HttpServletRequest request) throws Exception {			
+			
+            DHXPlanner p = new DHXPlanner("../codebase_common/", DHXSkin.TERRACE);
             
             String params = "";
             
@@ -97,7 +99,15 @@ public class HelloController {
             return mnv;
     }
 
-    @RequestMapping("/my/events")
+    private User getUser() {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    String username = auth.getName();		
+	    User user = userService.getUser(username);
+	    return user;
+	}
+
+
+	@RequestMapping("/my/events")
     @ResponseBody public String events(HttpServletRequest request) {
             //EventsManager evs = new EventsManager(request);
             //return evs.run();
