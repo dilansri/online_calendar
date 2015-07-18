@@ -17,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dhtmlx.planner.DHXPlanner;
 import com.dhtmlx.planner.DHXSkin;
 import com.dhtmlx.planner.controls.DHXAgendaView;
+import com.dhtmlx.planner.controls.DHXLightboxCheckbox;
+import com.dhtmlx.planner.controls.DHXLightboxSelect;
+import com.dhtmlx.planner.controls.DHXLightboxSelectOption;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.EventManager;
@@ -57,6 +60,10 @@ public class HelloController {
 	@RequestMapping("/my/planner")
     public ModelAndView planner(HttpServletRequest request) throws Exception {	
 		
+			if(!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+				return new ModelAndView("redirect:/login");
+			}
+		
 			User user = getUser();
 			UserPreference userPref = user.getUserPreference();
             DHXPlanner p = new DHXPlanner("../codebase_common/", DHXSkin.valueOf(userPref.getSkin()));
@@ -79,6 +86,21 @@ public class HelloController {
         	//p.setInitialView("month");
         	p.config.setDetailsOnCreate(true);
         	p.config.setDetailsOnDblClick(true);
+        	
+        	
+        	/*
+        	DHXLightboxSelect select = new DHXLightboxSelect("textColor", "Priority");
+        	select.setServerList("textColor");
+        	select.addOption(new DHXLightboxSelectOption("grey","low"));
+        	p.lightbox.add(select);
+        	
+        	DHXLightboxCheckbox check = new DHXLightboxCheckbox("highlighting", "Important");
+        	check.setMapTo("textColor");
+        	check.setCheckedValue("red");
+        	 
+        	p.lightbox.add(check);*/
+        	
+        	        	
             //p.setWidth(900);
         	
         	/*
@@ -111,8 +133,11 @@ public class HelloController {
 
 	@RequestMapping("/my/events")
     @ResponseBody public String events(HttpServletRequest request) {
-            //EventsManager evs = new EventsManager(request);
-            //return evs.run();
+        
+		if(!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+			return "redirect:/login";
+		}
+	
     	
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();		
@@ -133,7 +158,13 @@ public class HelloController {
     }
     
     @RequestMapping("/my/agenda")
-    public ModelAndView scheduler_05(HttpServletRequest request) throws Exception {
+    public ModelAndView agenda(HttpServletRequest request) throws Exception {
+    	
+    	if(!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+			return new ModelAndView("redirect:/login");
+		}
+	
+    	
     	DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
         //p.setInitialDate(2013, 1, 2);
         p.extensions.add(DHXExtension.RECURRING);

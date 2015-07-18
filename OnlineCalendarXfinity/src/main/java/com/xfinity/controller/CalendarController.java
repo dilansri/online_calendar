@@ -56,11 +56,33 @@ public class CalendarController {
 		
 		ModelAndView mnv = new ModelAndView("shareCalendar");
         
-		List<String> sharedWithMeUsers = calendarService.getSharedCalendarsWithMe();
-		List<String> sharedByMeUsers = calendarService.getSharedCalendarsByMe();
 		
+		
+		if(request.getMethod().equals("POST")){
+			String sharedWithUser= request.getParameter("shared_with");
+			User user = userService.getUser(sharedWithUser);
+			if(user == null) {
+				mnv.addObject("error","User not found.");
+				return mnv;
+			}
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		    String sharedByUser = auth.getName(); //get logged in username
+		    
+		    try{
+		    	calendarService.shareCalendar(sharedByUser, sharedWithUser);
+		    }catch(PersistenceException cve){
+		    	mnv.addObject("error","Something went wrong.");
+		    	return mnv;
+		    }
+		    
+		    mnv.addObject("success","Your calendar has been successfully shared with "+sharedWithUser);
+		}
+		
+		List<String> sharedWithMeUsers = calendarService.getSharedCalendarsWithMe();
+		List<String> sharedByMeUsers = calendarService.getSharedCalendarsByMe();		
 		mnv.addObject("sharedWithMeUsers", sharedWithMeUsers);
 		mnv.addObject("sharedByMeUsers", sharedByMeUsers);
+		
         return mnv;
 	}	
 	
@@ -88,7 +110,7 @@ public class CalendarController {
 	public ModelAndView viewUserCalendar(WebRequest request, Model model) throws Exception{
 		String user= request.getParameter("user");
 		
-		//TODO Check for validity
+		
 		if(!calendarService.isCalendarShared(user)){
 			return new ModelAndView("sharingFailure");
 		}
@@ -111,7 +133,8 @@ public class CalendarController {
     	
         p.load("../sharedCalendar.html?user="+user, DHXDataFormat.JSON);
         //p.data.dataprocessor.setURL("../events.html");
-        ModelAndView mnv = new ModelAndView("article");
+        ModelAndView mnv = new ModelAndView("viewCalendar");
+        mnv.addObject("user",user);
         mnv.addObject("body", p.render());
         return mnv;		
 		

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Material Admin - Login</title>
+<title>Xfinity Calendar - Login</title>
 
 <!-- BEGIN META -->
 <meta charset="utf-8">
@@ -51,12 +51,12 @@
 							action="${loginUrl}" method="post">
 							
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
-						    <c:if test="${param.error != null}">       
-						        <p>
-						            Invalid username and password.
-						        </p>
-						    </c:if>
+							<c:if test="${param.error != null}">       
+						        <div class="alert alert-callout alert-danger" role="alert">
+									<strong>Oh snap!</strong> Invalid credentials. Try Again.
+								</div>
+							</c:if>
+						    
 						    
 							<div class="form-group">
 								<input type="text" class="form-control" id="username"

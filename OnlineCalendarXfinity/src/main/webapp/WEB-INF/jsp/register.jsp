@@ -48,30 +48,36 @@
 						<br />
 						
 						<form class="form floating-label"
-							action="./registerUser" method="post">
+							action="./register" method="post">
 							
 							
 
-						    <c:if test="${param.error != null}">       
-						        <p>
-						            Invalid username and password.
-						        </p>
+						    <c:if test="${error != null}">       
+						        <div class="alert alert-callout alert-danger" role="alert">
+									<strong>Oh snap!</strong> ${error}
+								</div>
+						    </c:if>
+						    
+						    <c:if test="${success != null}">       
+						        <div class="alert alert-callout alert-success" role="alert">
+									<strong>Congratulations! </strong> ${success} Start using Xfinity Calendar now. <a href="./login" style="color:teal;">Login</a> here.
+								</div>
 						    </c:if>
 						    
 							<div class="form-group">
 								<input type="text" class="form-control" id="username"
-									name="username" required> <label for="username">Username</label>
+									name="username" value="${param.username}" required <c:if test="${success != null}">disabled</c:if>> <label for="username">Username</label>
 							</div>
 							<div class="form-group">
 								<input type="email" class="form-control" id="email"
-									name="email" required> <label for="email">Email</label>
+									name="email" value="${param.email}" required <c:if test="${success != null}">disabled</c:if> > <label for="email">Email</label>
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" id="password"
+								<input type="password" class="form-control" id="password" <c:if test="${success != null}">disabled</c:if>
 									name="password" required pattern=".{6,}" title="Password must be six or more characters"> <label for="password">Password</label>
 							</div>
 							<div class="form-group">
-								<input type="password" class="form-control" id="confirm_password"
+								<input type="password" class="form-control" id="confirm_password" <c:if test="${success != null}">disabled</c:if>
 									name="confirm_password" required> <label for="confirm_password">Confirm Password</label>
 							</div>
 							<br />
@@ -81,7 +87,7 @@
 								</div>
 								<!--end .col -->
 								<div class="col-xs-6 text-right">
-									<button class="btn btn-primary btn-raised" type="submit">Register</button>
+									<button class="btn btn-primary btn-raised" type="submit" <c:if test="${success != null}">disabled</c:if>>Register</button>
 								</div>
 								<!--end .col -->
 							</div>

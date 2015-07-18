@@ -1,5 +1,7 @@
 package com.xfinity.service;
 
+import javax.persistence.PersistenceException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,7 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 	
 	@Transactional
-	public User save(User user) {		
+	public User save(User user) throws PersistenceException {		
 		return userRepository.save(user);
 	}
 

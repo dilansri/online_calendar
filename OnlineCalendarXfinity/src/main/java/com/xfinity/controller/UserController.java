@@ -27,10 +27,38 @@ public class UserController {
 	UserService userService;
 	
 	@RequestMapping(value="/register")
-	public String register(Model model){
-		model.addAttribute("greeting","HELLO WORLDss");		
+	public ModelAndView register(HttpServletRequest request){
+		
+		if(request.getMethod().equals("POST")){
+			//model.addAttribute("greeting","HELLO WORLDss");	
+			String username= request.getParameter("username");
+			String password = request.getParameter("password");
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			password = encoder.encode(password);
+			User registeredUser = new User(username,password,true);
+			UserPreference userPreference = new UserPreference();
+			userPreference.setUsername(registeredUser.getUsername());
+			registeredUser.setUserPreference(userPreference);
+			userPreference.setUser(registeredUser);
 			
-		return "register";
+			//userService.savePreference(userPreference);
+			try{
+				userService.save(registeredUser);
+			}catch(javax.persistence.PersistenceException exception){
+				ModelAndView mnv = new ModelAndView("register");
+				mnv.addObject("error","User already exists. Try a different username.");
+				return mnv;
+			}catch(Exception ex){
+				ModelAndView mnv = new ModelAndView("register");
+				mnv.addObject("error","Something went wrong. Please try again later.");
+				return mnv;
+			}
+			ModelAndView mnv = new ModelAndView("register");
+			mnv.addObject("success","You've been successfully registered.");
+			return mnv;
+		}
+			
+		return new ModelAndView("register");
 	}
 	@RequestMapping(value="/registerUser",method=RequestMethod.POST)
 	public ModelAndView registerUserAccount(WebRequest request, Model model){
@@ -44,10 +72,10 @@ public class UserController {
 		userPreference.setUsername(registeredUser.getUsername());
 		registeredUser.setUserPreference(userPreference);
 		userPreference.setUser(registeredUser);
-		userService.save(registeredUser);
+		
 		//userService.savePreference(userPreference);
 		try{
-			
+			userService.save(registeredUser);
 		}catch(javax.persistence.PersistenceException exception){
 			return new ModelAndView("register");
 		}		
@@ -91,7 +119,7 @@ public class UserController {
 			
 			userService.savePreference(userPref);
 			mnv.addObject("pref",userPref);
-			mnv.addObject("success", "successfully updated");
+			mnv.addObject("success", "Your settings are successfully updated.");
 			return mnv;
 		}
 		mnv.addObject("pref",userPref);

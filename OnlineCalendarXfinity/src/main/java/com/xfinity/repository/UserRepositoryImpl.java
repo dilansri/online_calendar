@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,7 @@ public class UserRepositoryImpl implements UserRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	public User save(User user) {
+	public User save(User user) throws PersistenceException {
 		em.persist(user);
 		em.flush();
 		return user;

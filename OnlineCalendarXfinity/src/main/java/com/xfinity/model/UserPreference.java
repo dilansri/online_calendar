@@ -45,29 +45,29 @@ public class UserPreference {
 		
 		skin = "TERRACE";
 		
-		recurringColor = "#808080";
-		recurringTextColor = "#FFFFFF";
+		recurringColor = "rgb(128,128,128)";
+		recurringTextColor = "rgb(255,255,255)";
 		
-		sundayColor = "#FF0000";
-		sundayTextColor = "#FFFFFF";
+		sundayColor = "rgb(255, 0, 0)";
+		sundayTextColor = "rgb(255,255,255)";
 
-		mondayColor = "#008000";
-		mondayTextColor = "#FFFFFF";
+		mondayColor = "rgb(0, 128, 0)";
+		mondayTextColor = "rgb(255,255,255)";
 
-		tuesdayColor = "#808000";
-		tuesdayTextColor = "#FFFFFF";
+		tuesdayColor = "rgb(128,128,0)";
+		tuesdayTextColor = "rgb(255,255,255)";
 
-		wednesdayColor = "#008080";
-		wednesdayTextColor = "#FFFFFF";
+		wednesdayColor = "rgb(0,128,128)";
+		wednesdayTextColor = "rgb(255,255,255)";
 
-		thursdayColor = "#FFA500";
-		thursdayTextColor = "#FFFFFF";
+		thursdayColor = "rgb(255,165,0)";
+		thursdayTextColor = "rgb(255,255,255)";
 
-		fridayColor = "#800000";
-		fridayTextColor = "#FFFFFF";
+		fridayColor = "rgb(128,0,0)";
+		fridayTextColor = "rgb(255,255,255)";
 
-		saturdayColor = "#800080";
-		saturdayTextColor = "#FFFFFF";
+		saturdayColor = "rgb(128,0,128)";
+		saturdayTextColor = "rgb(255,255,255)";
 	}
 
 	@Id

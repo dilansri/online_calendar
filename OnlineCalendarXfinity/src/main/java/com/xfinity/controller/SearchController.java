@@ -46,9 +46,7 @@ public class SearchController {
 			}catch(Exception ex){
 				
 			}
-		}
-		
-		
+		}			
 		
 		mnv.addObject("result", searchResult);
         return mnv;
