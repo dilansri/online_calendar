@@ -45,8 +45,6 @@ public class EventManager extends DHXEventsManager {
 	@Override
     public Iterable getEvents() {
 		List<Event> events = eventService.findAllEvents(user.getUsername(),options);
-		
-		
 		return events;
 	}
 	
@@ -57,7 +55,9 @@ public class EventManager extends DHXEventsManager {
 		
 		//ev.setColor("orange");	    
 	    ev.setUser(user);
-	    ev.setColor();
+	    ev.setColor();	    
+	    
+	    
 		if (status == DHXStatus.INSERT){
 			eventService.save(ev);
 		}else if (status == DHXStatus.UPDATE){

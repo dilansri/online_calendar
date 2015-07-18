@@ -22,6 +22,7 @@
 		<link type="text/css" rel="stylesheet" href="../resources/css/theme-default/font-awesome.min.css?1422529194" />
 		<link type="text/css" rel="stylesheet" href="../resources/css/theme-default/material-design-iconic-font.min.css?1421434286" />
 		<link type="text/css" rel="stylesheet" href="../resources/css/theme-default/libs/bootstrap-colorpicker/bootstrap-colorpicker.css?1424887860" />
+		<link rel="stylesheet" href="../calendar_assets/css/main.css" />
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,7 +32,24 @@
 		<![endif]-->
 	</head>
 	<body class="menubar-hoverable header-fixed ">
+		<header id="header">
 
+				<!-- Logo -->
+					<h1 id="logo">Xfinity Calendar</h1>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="./planner">Planner</a></li>
+							<li><a href="./agenda">Agenda</a></li>
+							<li><a href="./teamCalendar">Team Calendar</a></li>
+							<li><a href="./share">Share Calendar</a></li>
+							
+							<li><a href="#Logout">Logout</a></li>
+						</ul>
+					</nav>
+
+		</header>
 
 		<!-- BEGIN BASE-->
 		<div id="base">
@@ -42,7 +60,7 @@
 			<!-- END OFFCANVAS LEFT -->
 
 			<!-- BEGIN CONTENT-->
-			<div id="content">
+			<div id="">
 				<section>
 					<div class="section-body contain-lg">
 						<!-- BEGIN INTRO -->
@@ -270,10 +288,38 @@
 													</div><!--end .form-group -->													
 													</td>
 												</tr>
+												
+												<tr>
+													<td>Important Events</td>
+													<td>
+													<div class="form-group">
+														<div class="color_picker input-group colorpicker-component" data-color="${pref.importantEventColor}" data-color-format="rgb" style="width: 60%;">
+															<div class="input-group-content">
+																<input name="important_event_color" type="text" value="${pref.importantEventColor}" readonly="" class="form-control">
+																<label>Event Color</label>
+															</div>
+															<div class="input-group-addon"><i style="border-style: solid; border-width: 1px; border-color:black;background-color: ${pref.importantEventColor};"></i></div>
+														</div>
+													</div><!--end .form-group -->
+													</td>
+													<td>
+													<div class="form-group">
+														<div class="color_picker input-group colorpicker-component" data-color="${pref.importantTextColor}" data-color-format="rgb" style="width: 60%;">
+															<div class="input-group-content">
+																<input name="important_text_color" type="text" value="${pref.importantTextColor}" readonly="" class="form-control">
+																<label>Text Color</label>
+															</div>
+															<div class="input-group-addon"><i style="border-style: solid; border-width: 1px; border-color:black;background-color: ${pref.importantTextColor};"></i></div>
+														</div>
+													</div><!--end .form-group -->													
+													</td>
+												</tr>
 											</tbody>
 										</table>
 									</div><!--end .card-body -->
-								</div><!--end .card -->
+								</div><!--end .card -->								
+								
+								
 							</div><!--end .col -->
 							
 							<div class="col-sm-11 col-sm-offset-1">

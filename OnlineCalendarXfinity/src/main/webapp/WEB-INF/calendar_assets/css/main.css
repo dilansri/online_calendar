@@ -11,10 +11,14 @@
 		height: 3em;
 		line-height: 3em;
 		box-shadow: 0 0 0.15em 0 rgba(0, 0, 0, 0.1);
+		color:rgba(49, 53, 52, 0.6);
+		font-size:15px;
+		font-weight:400;
 	}
 
 	body {
 		padding-top: 3em;
+		font-family:"Roboto",sans-serif,Helvetica,Arial,sans-serif;
 	}
 
 	#logo {
@@ -40,7 +44,7 @@
 			#nav ul li {
 				display: inline-block;
 				margin-left: 0.5em;
-				font-size: 0.9em;
+				font-size: 15px;
 			}
 
 				#nav ul li a {
@@ -51,4 +55,5 @@
 					line-height: 3em;
 					padding: 0 0.5em 0 0.5em;
 					outline: 0;
+					
 				}

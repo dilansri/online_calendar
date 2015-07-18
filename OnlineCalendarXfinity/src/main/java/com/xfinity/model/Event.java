@@ -34,6 +34,12 @@ public class Event extends DHXEventRec {
 
 	public void setColor() {
 		
+		if(importance != null && importance.equals("YES")){
+			this.color = user.getUserPreference().getImportantEventColor();
+			this.textColor = user.getUserPreference().getImportantTextColor();
+			return;
+		}
+		
 		Calendar c = Calendar.getInstance();
 		c.setTime(start_date);
 		
@@ -78,5 +84,21 @@ public class Event extends DHXEventRec {
 			this.textColor = user.getUserPreference().getRecurringTextColor();
 		}
 	}
+	
+	private String importance;
+    public String getImportance() {
+            return importance;
+    }
+    public void setImportance(String importance) {
+            this.importance = importance;
+    }
+    
+    private String eventType;
+    public String getEventType() {
+            return eventType;
+    }
+    public void setEventType(String eventType) {
+            this.eventType = eventType;
+    }
 
 }

@@ -17,6 +17,7 @@
 		<link type="text/css" rel="stylesheet" href="../resources/css/theme-default/materialadmin.css?1425466319" />
 		<link type="text/css" rel="stylesheet" href="../resources/css/theme-default/font-awesome.min.css?1422529194" />
 		<link type="text/css" rel="stylesheet" href="../resources/css/theme-default/material-design-iconic-font.min.css?1421434286" />
+		<link rel="stylesheet" href="../calendar_assets/css/main.css" />
 		<!-- END STYLESHEETS -->
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -26,7 +27,24 @@
 		<![endif]-->
 	</head>
 	<body class="menubar-hoverable header-fixed ">
+		<header id="header">
 
+				<!-- Logo -->
+					<h1 id="logo" style="font-size:34px;">Xfinity Calendar</h1>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="./planner" style="font-weight: 100;">Planner</a></li>
+							<li><a href="./agenda" style="font-weight: 100;">Agenda</a></li>
+							<li><a href="./teamCalendar" style="font-weight: 100;">Team Calendar</a></li>
+							<li><a href="./share" style="font-weight: 100;">Share Calendar</a></li>
+							
+							<li><a href="./logout" style="font-weight: 100;">Logout</a></li>
+						</ul>
+					</nav>
+
+		</header>
 
 		<!-- BEGIN BASE-->
 		<div id="base">
@@ -37,7 +55,7 @@
 			<!-- END OFFCANVAS LEFT -->
 
 			<!-- BEGIN CONTENT-->
-			<div id="content">
+			<div id="">
 				<section>
 					<div class="section-body contain-lg">
 						<!-- BEGIN INTRO -->

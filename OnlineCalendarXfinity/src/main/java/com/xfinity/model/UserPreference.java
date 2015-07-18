@@ -40,6 +40,9 @@ public class UserPreference {
 	private String saturdayTextColor;
 	
 	private String skin;
+	
+	private String importantEventColor;
+	private String importantTextColor;
 
 	public UserPreference() {
 		
@@ -68,6 +71,9 @@ public class UserPreference {
 
 		saturdayColor = "rgb(128,0,128)";
 		saturdayTextColor = "rgb(255,255,255)";
+		
+		importantEventColor = "rgb(128,0,128)";
+		importantTextColor = "rgb(255,255,255)";
 	}
 
 	@Id
@@ -252,6 +258,24 @@ public class UserPreference {
 		}
 		
 		this.skin = skinVal;
+	}
+	
+	@Column(name = "important_event_color")
+	public String getImportantEventColor() {
+		return importantEventColor;
+	}
+
+	public void setImportantEventColor(String importantEventColor) {
+		this.importantEventColor = importantEventColor;
+	}
+	
+	@Column(name = "important_text_color")
+	public String getImportantTextColor() {
+		return importantTextColor;
+	}
+
+	public void setImportantTextColor(String importantTextColor) {
+		this.importantTextColor = importantTextColor;
 	}
 
 }

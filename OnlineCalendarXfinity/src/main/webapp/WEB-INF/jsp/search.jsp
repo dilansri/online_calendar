@@ -38,12 +38,12 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="./planner">Planner</a></li>
-							<li><a href="./agenda">Agenda</a></li>
-							<li><a href="./teamCalendar">Team Calendar</a></li>
-							<li><a href="./share">Share Calendar</a></li>
+							<li><a href="./planner" style="font-weight: 100;">Planner</a></li>
+							<li><a href="./agenda" style="font-weight: 100;">Agenda</a></li>
+							<li><a href="./teamCalendar" style="font-weight: 100;">Team Calendar</a></li>
+							<li><a href="./share" style="font-weight: 100;">Share Calendar</a></li>
 							
-							<li><a href="#Logout">Logout</a></li>
+							<li><a href="./logout" style="font-weight: 100;">Logout</a></li>
 						</ul>
 					</nav>
 
