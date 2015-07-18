@@ -37,7 +37,9 @@ public class SearchController {
 				Date endDate = sdf.parse(endDateString);
 				
 				searchResult = searchService.search(startDate, endDate);
-				
+				if(searchResult.size() == 0 ){
+					mnv.addObject("no_result","No results found.");
+				}
 				mnv.addObject("startDateString",startDateString);
 				mnv.addObject("endDateString",endDateString);
 				

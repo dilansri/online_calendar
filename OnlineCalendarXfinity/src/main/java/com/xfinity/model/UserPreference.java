@@ -38,8 +38,13 @@ public class UserPreference {
 
 	private String saturdayColor;
 	private String saturdayTextColor;
+	
+	private String skin;
 
 	public UserPreference() {
+		
+		skin = "TERRACE";
+		
 		recurringColor = "#808080";
 		recurringTextColor = "#FFFFFF";
 		
@@ -227,6 +232,26 @@ public class UserPreference {
 
 	public void setSaturdayTextColor(String saturdayTextColor) {
 		this.saturdayTextColor = saturdayTextColor;
+	}
+	
+	@Column(name = "skin")
+	public String getSkin() {
+		return skin;
+	}
+
+	public void setSkin(String skin) {
+		
+		String skinVal = "TERRACE";
+		
+		if(skin.toUpperCase().equals("TERRACE")){
+			skinVal = "TERRACE";
+		}else if(skin.toUpperCase().equals("CLASSIC")){
+			skinVal = "CLASSIC";
+		}else if(skin.toUpperCase().equals("GLOSSY")){
+			skinVal = "GLOSSY";
+		}
+		
+		this.skin = skinVal;
 	}
 
 }

@@ -48,58 +48,62 @@
 					</nav>
 
 		</header>
-		<div class="container">
-		<div class="row">
-		<div class="card">
-			<div class="card-head style-primary">
-				<header>Search Events</header>
-			</div>
-			<div class="card-body">
-				<form method="POST" class="form">
-					<div class="form-group">
-						<div class="input-daterange input-group" id="demo-date-range">
-							<div class="input-group-content">
-								<input type="text" class="form-control" name="startDate" /> <label>Date
-									range</label>
-							</div>
-							<span class="input-group-addon">to</span>
-							<div class="input-group-content">
-								<input type="text" class="form-control" name="endDate" />
-								<div class="form-control-line"></div>
-							</div>
-						</div>						
-					</div>
-					<button type="submit" class="btn ink-reaction btn-lg btn-primary">Find Events</button>
-				</form>
-					<c:if test="${fn:length(result) gt 0}">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Start Time</th>
-								<th>End Time</th>
-								<th>Event</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach  var="item" items="${result}">
-							<tr>
-								
-								<td><fmt:formatDate pattern="E d/M/y h:m a" value="${item.start_date}" /></td>
-								<td><fmt:formatDate pattern="E d/M/y h:m a" value="${item.end_date}" /></td>
-								<td>${item.text}</td>
-								
-							</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-					</c:if>
-
+		<section>
+			<div class="container">
+			<div class="row">
+			<div class="card">
+				<div class="card-head style-primary">
+					<header>Search Events</header>
 				</div>
-			<!--end .card-body -->
-		</div>
-		<!--end .card -->
-		</div>
-		</div>
+				<div class="card-body">
+					<form method="POST" class="form">
+						<div class="form-group">
+							<div class="input-daterange input-group" id="demo-date-range">
+								<div class="input-group-content">
+									<input type="text" class="form-control" name="startDate" required /> <label>Date
+										range</label>
+								</div>
+								<span class="input-group-addon">to</span>
+								<div class="input-group-content">
+									<input type="text" class="form-control" name="endDate" required />
+									<div class="form-control-line"></div>
+								</div>
+							</div>						
+						</div>
+						<button type="submit" class="btn ink-reaction btn-lg btn-primary">Find Events</button>
+						
+						<p>${no_result}</p>
+					</form>
+						<c:if test="${fn:length(result) gt 0}">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Start Time</th>
+									<th>End Time</th>
+									<th>Event</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach  var="item" items="${result}">
+								<tr>
+									
+									<td><fmt:formatDate pattern="E d/M/y h:m a" value="${item.start_date}" /></td>
+									<td><fmt:formatDate pattern="E d/M/y h:m a" value="${item.end_date}" /></td>
+									<td>${item.text}</td>
+									
+								</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						</c:if>
+	
+					</div>
+				<!--end .card-body -->
+			</div>
+			<!--end .card -->
+			</div>
+			</div>
+		</section>
 
 	<!-- BEGIN JAVASCRIPT -->
 		<script src="../resources/js/libs/jquery/jquery-1.11.2.min.js"></script>

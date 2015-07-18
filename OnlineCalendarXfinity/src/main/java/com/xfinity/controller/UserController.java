@@ -87,6 +87,8 @@ public class UserController {
 			userPref.setSaturdayColor(request.getParameter("sat_color"));
 			userPref.setSaturdayTextColor(request.getParameter("sat_text_color"));
 			
+			userPref.setSkin(request.getParameter("skin"));
+			
 			userService.savePreference(userPref);
 			mnv.addObject("pref",userPref);
 			mnv.addObject("success", "successfully updated");
@@ -96,6 +98,15 @@ public class UserController {
 		return mnv;
 	}
 	
+	@RequestMapping("/login") 
+	public String login() {
+		return "login";
+	}
+	
+	@RequestMapping("/403") 
+	public String error() {
+		return "403";
+	}
 	
 	
 	 private User getUser() {

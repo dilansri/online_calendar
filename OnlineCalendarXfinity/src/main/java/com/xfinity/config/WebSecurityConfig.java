@@ -42,8 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		  .csrf().disable()
 	      .authorizeRequests().antMatchers(HttpMethod.GET, "/my/**")
 	      .authenticated() 
-	      .and().formLogin()
-	      .and().httpBasic();
+	      .and().formLogin().loginPage("/login").permitAll();
 	}
 	
 	@Bean

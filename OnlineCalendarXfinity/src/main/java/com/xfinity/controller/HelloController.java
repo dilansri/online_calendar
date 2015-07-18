@@ -55,9 +55,11 @@ public class HelloController {
 	}	
 	
 	@RequestMapping("/my/planner")
-    public ModelAndView planner(HttpServletRequest request) throws Exception {			
-			
-            DHXPlanner p = new DHXPlanner("../codebase_common/", DHXSkin.TERRACE);
+    public ModelAndView planner(HttpServletRequest request) throws Exception {	
+		
+			User user = getUser();
+			UserPreference userPref = user.getUserPreference();
+            DHXPlanner p = new DHXPlanner("../codebase_common/", DHXSkin.valueOf(userPref.getSkin()));
             
             String params = "";
             

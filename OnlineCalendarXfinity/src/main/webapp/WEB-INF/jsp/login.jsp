@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Xfinity Online Calendar - Register</title>
+<title>Material Admin - Login</title>
 
 <!-- BEGIN META -->
 <meta charset="utf-8">
@@ -43,14 +43,14 @@
 		<div class="card contain-sm style-transparent">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-sm-12">
-						<br /> <span class="text-lg text-bold text-primary">Xfinity Online Calendar Registration</span> <br />
+					<div class="col-sm-6">
+						<br /> <span class="text-lg text-bold text-primary">Xfinity Online Calendar</span> <br />
 						<br />
-						
+						<c:url var="loginUrl" value="/login" />
 						<form class="form floating-label"
-							action="./registerUser" method="post">
+							action="${loginUrl}" method="post">
 							
-							
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
 						    <c:if test="${param.error != null}">       
 						        <p>
@@ -63,32 +63,39 @@
 									name="username" required> <label for="username">Username</label>
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" id="email"
-									name="email" required> <label for="email">Email</label>
-							</div>
-							<div class="form-group">
 								<input type="password" class="form-control" id="password"
-									name="password" required pattern=".{6,}" title="Password must be six or more characters"> <label for="password">Password</label>
-							</div>
-							<div class="form-group">
-								<input type="password" class="form-control" id="confirm_password"
-									name="confirm_password" required> <label for="confirm_password">Confirm Password</label>
+									name="password" required> <label for="password">Password</label>
+								<p class="help-block">
+									<a href="#">Forgotten?</a>
+								</p>
 							</div>
 							<br />
 							<div class="row">
 								<div class="col-xs-6 text-left">
-									
+									<div class="checkbox checkbox-inline checkbox-styled">
+										<label> <input type="checkbox"> <span>Remember
+												me</span>
+										</label>
+									</div>
 								</div>
 								<!--end .col -->
 								<div class="col-xs-6 text-right">
-									<button class="btn btn-primary btn-raised" type="submit">Register</button>
+									<button class="btn btn-primary btn-raised" type="submit">Login</button>
 								</div>
 								<!--end .col -->
 							</div>
 							<!--end .row -->
 						</form>
 					</div>
-					
+					<!--end .col -->
+					<div class="col-sm-5 col-sm-offset-1 text-center">
+						<br>
+						<br>
+						<h3 class="text-light">No account yet?</h3>
+						<a class="btn btn-block btn-raised btn-primary" href="./register">Sign
+							up here</a> <br>
+					</div>
+					<!--end .col -->
 				</div>
 				<!--end .row -->
 			</div>
@@ -97,22 +104,6 @@
 		<!--end .card -->
 	</section>
 	<!-- END LOGIN SECTION -->
-	
-	<script>
-		var password = document.getElementById("password")
-		  , confirm_password = document.getElementById("confirm_password");
-	
-		function validatePassword(){
-		  if(password.value != confirm_password.value) {
-		    confirm_password.setCustomValidity("Passwords Don't Match");
-		  } else {
-		    confirm_password.setCustomValidity('');
-		  }
-		}
-	
-		password.onchange = validatePassword;
-		confirm_password.onkeyup = validatePassword;
-	</script>
 
 	<!-- BEGIN JAVASCRIPT -->
 	<script src="./resources/js/libs/jquery/jquery-1.11.2.min.js"></script>
