@@ -116,6 +116,14 @@
 											</thead>
 											<tbody>
 												<tr>
+													<div class="checkbox checkbox-styled">
+														<label>
+															<input name="keepOldColors" <c:if test="${pref.keepOldColors}"> checked </c:if> value="yes" type="checkbox">
+															<span>Keep my old colors unchanged.</span>
+														</label>
+													</div>
+												</tr>
+												<tr>
 													<td>Sunday</td>
 													<td>
 													<div class="form-group">

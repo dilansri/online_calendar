@@ -109,10 +109,10 @@ public class HelloController {
         	String enableMap = request.getParameter("map");
             if(enableMap != null && enableMap.equals("yes")){
             	
+            	p.views.clear();
             	
-            	p.views.add(new DHXMapView());
-            	DHXMapView map = (DHXMapView) p.views.getView(3);
-            	map.setStartDate(2013, 1, 1);
+            	DHXMapView map = new DHXMapView();
+            	p.views.add(map);
             	p.setInitialView("map");
             	
             	

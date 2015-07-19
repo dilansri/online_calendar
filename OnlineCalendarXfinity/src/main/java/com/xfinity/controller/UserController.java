@@ -120,6 +120,12 @@ public class UserController {
 			userPref.setTeamEventColor(request.getParameter("team_event_color"));
 			userPref.setTeamTextColor(request.getParameter("team_text_color"));
 			
+			if(request.getParameter("keepOldColors") != null && request.getParameter("keepOldColors").equals("yes")){
+				userPref.setKeepOldColors(true);
+			}else{
+				userPref.setKeepOldColors(false);
+			}
+			
 			userService.savePreference(userPref);
 			mnv.addObject("pref",userPref);
 			mnv.addObject("success", "Your settings are successfully updated.");

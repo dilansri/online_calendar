@@ -74,6 +74,8 @@ public class UserPreference {
 		
 		teamEventColor = "rgb(128,0,128)";
 		teamTextColor = "rgb(255,255,255)";
+		
+		keepOldColors = false;
 	}
 
 	@Id
@@ -277,5 +279,19 @@ public class UserPreference {
 	public void setTeamTextColor(String teamTextColor) {
 		this.teamTextColor = teamTextColor;
 	}
+	
+	private boolean keepOldColors;
+	
+	@Column(name = "keep_old_colors")
+	public boolean isKeepOldColors() {
+		return keepOldColors;
+	}
+
+	public void setKeepOldColors(boolean keepOldColors) {
+		this.keepOldColors = keepOldColors;
+	}
+	
+	
+	
 
 }

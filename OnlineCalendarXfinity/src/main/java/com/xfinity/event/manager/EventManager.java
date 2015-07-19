@@ -45,6 +45,13 @@ public class EventManager extends DHXEventsManager {
 	@Override
     public Iterable getEvents() {
 		List<Event> events = eventService.findAllEvents(user.getUsername(),options);
+		
+		if(!user.getUserPreference().isKeepOldColors()){
+			for(Event ev:events){
+				ev.setUser(user);
+				ev.setColor();
+			}
+		}
 		return events;
 	}
 	
