@@ -61,6 +61,7 @@ public class EventManager extends DHXEventsManager {
 		if (status == DHXStatus.INSERT){
 			eventService.save(ev);
 		}else if (status == DHXStatus.UPDATE){
+			System.out.println("StartDate"+ev.getStart_date());
 			eventService.update(ev);
 		}else if(status == DHXStatus.DELETE){
 			eventService.delete(ev);

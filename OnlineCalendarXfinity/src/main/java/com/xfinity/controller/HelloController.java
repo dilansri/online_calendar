@@ -17,8 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dhtmlx.planner.DHXPlanner;
 import com.dhtmlx.planner.DHXSkin;
 import com.dhtmlx.planner.controls.DHXAgendaView;
-import com.dhtmlx.planner.controls.DHXLightboxCheckbox;
-import com.dhtmlx.planner.controls.DHXLightboxRecurringBlock;
+import com.dhtmlx.planner.controls.DHXLightboxMiniCalendar;
 import com.dhtmlx.planner.controls.DHXLightboxText;
 import com.dhtmlx.planner.controls.DHXMapView;
 import com.dhtmlx.planner.data.DHXDataFormat;
@@ -89,12 +88,18 @@ public class HelloController {
         	p.config.setDetailsOnDblClick(true);
         	
         	
-        	DHXLightboxRecurringBlock recurring = new DHXLightboxRecurringBlock("rec_type", "Recurring");
-        	p.lightbox.add(recurring);
         	
-        	DHXLightboxCheckbox importance = new DHXLightboxCheckbox("importance", "Important");
+        	
+        	/*DHXLightboxCheckbox importance = new DHXLightboxCheckbox("importance", "Important");
         	importance.setCheckedValue("YES");
-        	p.lightbox.add(importance);
+        	p.lightbox.add(importance);*/
+        	
+        	
+        	
+        	/*DHXLightboxMiniCalendar cal = new DHXLightboxMiniCalendar("Mini");
+        	p.lightbox.add(cal);*/
+        	
+        	
         	
         	String enableMap = request.getParameter("map");
             if(enableMap != null && enableMap.equals("yes")){
@@ -117,8 +122,7 @@ public class HelloController {
         	
         	
         	
-        	/*DHXLightboxMiniCalendar cal = new DHXLightboxMiniCalendar("Mini");
-        	p.lightbox.add(cal);*/
+        	
         	
         	/*
         	DHXLightboxSelect select = new DHXLightboxSelect("textColor", "Priority");
