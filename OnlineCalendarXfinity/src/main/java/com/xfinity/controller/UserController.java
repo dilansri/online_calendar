@@ -117,8 +117,8 @@ public class UserController {
 			
 			userPref.setSkin(request.getParameter("skin"));
 			
-			userPref.setImportantEventColor(request.getParameter("important_event_color"));
-			userPref.setImportantTextColor(request.getParameter("important_text_color"));
+			userPref.setTeamEventColor(request.getParameter("team_event_color"));
+			userPref.setTeamTextColor(request.getParameter("team_text_color"));
 			
 			userService.savePreference(userPref);
 			mnv.addObject("pref",userPref);

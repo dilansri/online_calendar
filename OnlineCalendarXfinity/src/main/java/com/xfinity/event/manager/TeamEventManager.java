@@ -56,6 +56,7 @@ public class TeamEventManager extends DHXEventsManager {
 	public DHXStatus saveEvent(DHXEv event, DHXStatus status) {
 		//eventService.save(event);
 		TeamEvent ev = (TeamEvent)event;
+		ev.setUser(user);
 		ev.setColor();
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -72,13 +73,12 @@ public class TeamEventManager extends DHXEventsManager {
 	    }
 	    
 	    ev.setUser(user);
-	    
 	    Event teamEvent = new Event();
 	    teamEvent.setStart_date(ev.getStart_date());
 	    teamEvent.setEnd_date(ev.getEnd_date());
 	    teamEvent.setText("Team Event :"+ev.getText());
 	    teamEvent.setUser(user);
-	    teamEvent.setColor();
+	    teamEvent.setTeamColor();
 	    
 	    
 	    

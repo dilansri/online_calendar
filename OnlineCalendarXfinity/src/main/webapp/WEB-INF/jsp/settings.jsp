@@ -40,12 +40,14 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="./planner">Planner</a></li>
-							<li><a href="./agenda">Agenda</a></li>
-							<li><a href="./teamCalendar">Team Calendar</a></li>
-							<li><a href="./share">Share Calendar</a></li>
-							
-							<li><a href="#Logout">Logout</a></li>
+							<li><a href="./planner" style="font-weight: 100;">Planner</a></li>
+							<li><a href="./agenda" style="font-weight: 100;">Agenda</a></li>
+							<li><a href="./teamCalendar" style="font-weight: 100;">Team Calendar</a></li>
+							<li><a href="./doctorCalendar" style="font-weight: 100;">Doctor Appointments</a></li>
+							<li><a href="./share" style="font-weight: 100;">Share Calendar</a></li>
+							<li><a href="./search" style="font-weight: 100;">Search Events</a></li>
+							<li><a href="./settings" style="font-weight: 100;">Settings</a></li>
+							<li><a href="../logout" style="font-weight: 100;">Logout</a></li>
 						</ul>
 					</nav>
 
@@ -290,26 +292,26 @@
 												</tr>
 												
 												<tr>
-													<td>Important Events</td>
+													<td>Team Events</td>
 													<td>
 													<div class="form-group">
-														<div class="color_picker input-group colorpicker-component" data-color="${pref.importantEventColor}" data-color-format="rgb" style="width: 60%;">
+														<div class="color_picker input-group colorpicker-component" data-color="${pref.teamEventColor}" data-color-format="rgb" style="width: 60%;">
 															<div class="input-group-content">
-																<input name="important_event_color" type="text" value="${pref.importantEventColor}" readonly="" class="form-control">
+																<input name="team_event_color" type="text" value="${pref.teamEventColor}" readonly="" class="form-control">
 																<label>Event Color</label>
 															</div>
-															<div class="input-group-addon"><i style="border-style: solid; border-width: 1px; border-color:black;background-color: ${pref.importantEventColor};"></i></div>
+															<div class="input-group-addon"><i style="border-style: solid; border-width: 1px; border-color:black;background-color: ${pref.teamEventColor};"></i></div>
 														</div>
 													</div><!--end .form-group -->
 													</td>
 													<td>
 													<div class="form-group">
-														<div class="color_picker input-group colorpicker-component" data-color="${pref.importantTextColor}" data-color-format="rgb" style="width: 60%;">
+														<div class="color_picker input-group colorpicker-component" data-color="${pref.teamTextColor}" data-color-format="rgb" style="width: 60%;">
 															<div class="input-group-content">
-																<input name="important_text_color" type="text" value="${pref.importantTextColor}" readonly="" class="form-control">
+																<input name="team_text_color" type="text" value="${pref.teamTextColor}" readonly="" class="form-control">
 																<label>Text Color</label>
 															</div>
-															<div class="input-group-addon"><i style="border-style: solid; border-width: 1px; border-color:black;background-color: ${pref.importantTextColor};"></i></div>
+															<div class="input-group-addon"><i style="border-style: solid; border-width: 1px; border-color:black;background-color: ${pref.teamTextColor};"></i></div>
 														</div>
 													</div><!--end .form-group -->													
 													</td>

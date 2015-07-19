@@ -15,12 +15,14 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li><a href="./planner">Planner</a></li>
-							<li><a href="./agenda">Agenda</a></li>
-							<li><a href="./teamCalendar">Team Calendar</a></li>
-							<li><a href="./share">Share Calendar</a></li>
-							
-							<li><a href="#Logout">Logout</a></li>
+							<li><a href="./planner" >Planner</a></li>
+							<li><a href="./agenda" >Agenda</a></li>
+							<li><a href="./teamCalendar" >Team Calendar</a></li>
+							<li><a href="./doctorCalendar">Doctor Appointments</a></li>
+							<li><a href="./share" >Share Calendar</a></li>
+							<li><a href="./search">Search Events</a></li>
+							<li><a href="./settings">Settings</a></li>
+							<li><a href="../logout">Logout</a></li>
 						</ul>
 					</nav>
 

@@ -31,14 +31,14 @@ public class Event extends DHXEventRec {
     public void setColor(String color) {
             this.color = color;
     }
+    
+    public void setTeamColor(){
+    	this.color = user.getUserPreference().getTeamEventColor();
+		this.textColor = user.getUserPreference().getTeamTextColor();
+    }
 
 	public void setColor() {
-		
-		if(importance != null && importance.equals("YES")){
-			this.color = user.getUserPreference().getImportantEventColor();
-			this.textColor = user.getUserPreference().getImportantTextColor();
-			return;
-		}
+				
 		
 		Calendar c = Calendar.getInstance();
 		c.setTime(start_date);

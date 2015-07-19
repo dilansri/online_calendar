@@ -39,7 +39,7 @@ private EventService eventService;
     public Iterable getEvents() {
 		List<Event> events = eventService.findAllEvents(user.getUsername());
 		for(Event ev:events){
-			ev.setText("#######");
+			ev.setText("");
 		}
 		return events;
 	}

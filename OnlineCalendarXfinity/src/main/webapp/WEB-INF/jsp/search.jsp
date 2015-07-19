@@ -41,9 +41,11 @@
 							<li><a href="./planner" style="font-weight: 100;">Planner</a></li>
 							<li><a href="./agenda" style="font-weight: 100;">Agenda</a></li>
 							<li><a href="./teamCalendar" style="font-weight: 100;">Team Calendar</a></li>
+							<li><a href="./doctorCalendar" style="font-weight: 100;">Doctor Appointments</a></li>
 							<li><a href="./share" style="font-weight: 100;">Share Calendar</a></li>
-							
-							<li><a href="./logout" style="font-weight: 100;">Logout</a></li>
+							<li><a href="./search" style="font-weight: 100;">Search Events</a></li>
+							<li><a href="./settings" style="font-weight: 100;">Settings</a></li>
+							<li><a href="../logout" style="font-weight: 100;">Logout</a></li>
 						</ul>
 					</nav>
 
