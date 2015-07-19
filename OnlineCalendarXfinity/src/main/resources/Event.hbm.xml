@@ -17,6 +17,9 @@
 			    <property column="color" name="color" type="java.lang.String"/>
 			    <property column="importance" name="importance" type="java.lang.String"/>
 			    <property column="event_type" name="eventType" type="java.lang.String"/>
+			    <property column="event_location" name="event_location" type="java.lang.String"/>
+			    <property column="lat" name="lat" type="java.lang.String"/>
+			    <property column="lng" name="lng" type="java.lang.String"/>
 			    <many-to-one name="user" class="com.xfinity.model.User" fetch="select">
 		            <column name="username" />
 		        </many-to-one>

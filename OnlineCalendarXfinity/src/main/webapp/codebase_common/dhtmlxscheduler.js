@@ -3530,6 +3530,15 @@ scheduler.get_visible_events = function(only_timed) {
 
 	return stack;
 };
+
+scheduler.get_all_events = function(only_timed){
+	var stack = [];
+	for (var id in this._events)
+		stack.push(this._events[id]);
+	
+	return stack;
+};
+
 scheduler.filter_event = function(id, ev) {
 	var filter = this["filter_" + this._mode];
 	return (filter) ? filter(id, ev) : true;

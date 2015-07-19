@@ -100,5 +100,31 @@ public class Event extends DHXEventRec {
     public void setEventType(String eventType) {
             this.eventType = eventType;
     }
+    
+    public String event_location;
+	public String getEvent_location() {
+		return event_location;
+	}
+	public void setEvent_location(String event_location) {
+		this.event_location = event_location;
+	}
+	
+	public String lat;
+	public String getLat() {
+		return lat;
+	}
+	
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	
+	public String lng;
+	public String getLng() {
+		return lng;
+	}
+	
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
 
 }

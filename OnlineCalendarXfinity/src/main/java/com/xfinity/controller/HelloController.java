@@ -18,10 +18,9 @@ import com.dhtmlx.planner.DHXPlanner;
 import com.dhtmlx.planner.DHXSkin;
 import com.dhtmlx.planner.controls.DHXAgendaView;
 import com.dhtmlx.planner.controls.DHXLightboxCheckbox;
-import com.dhtmlx.planner.controls.DHXLightboxMiniCalendar;
 import com.dhtmlx.planner.controls.DHXLightboxRecurringBlock;
-import com.dhtmlx.planner.controls.DHXLightboxSelect;
-import com.dhtmlx.planner.controls.DHXLightboxSelectOption;
+import com.dhtmlx.planner.controls.DHXLightboxText;
+import com.dhtmlx.planner.controls.DHXMapView;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.EventManager;
@@ -88,6 +87,36 @@ public class HelloController {
         	//p.setInitialView("month");
         	p.config.setDetailsOnCreate(true);
         	p.config.setDetailsOnDblClick(true);
+        	
+        	
+        	DHXLightboxRecurringBlock recurring = new DHXLightboxRecurringBlock("rec_type", "Recurring");
+        	p.lightbox.add(recurring);
+        	
+        	DHXLightboxCheckbox importance = new DHXLightboxCheckbox("importance", "Important");
+        	importance.setCheckedValue("YES");
+        	p.lightbox.add(importance);
+        	
+        	String enableMap = request.getParameter("map");
+            if(enableMap != null && enableMap.equals("yes")){
+            	
+            	
+            	p.views.add(new DHXMapView());
+            	DHXMapView map = (DHXMapView) p.views.getView(3);
+            	map.setStartDate(2013, 1, 1);
+            	p.setInitialView("map");
+            	
+            	
+            	DHXLightboxText loc = new DHXLightboxText("event_location", "Location");
+            	loc.setHeight(40);
+            	p.lightbox.add(loc);
+            	
+            	params += "showMap=yes&";
+            }
+        	
+        	
+        	
+        	
+        	
         	/*DHXLightboxMiniCalendar cal = new DHXLightboxMiniCalendar("Mini");
         	p.lightbox.add(cal);*/
         	
@@ -110,12 +139,9 @@ public class HelloController {
         	priority.addOption(new DHXLightboxSelectOption("HIGH","High"));        	
         	p.lightbox.add(priority);*/
         	
-        	DHXLightboxRecurringBlock recurring = new DHXLightboxRecurringBlock("rec_type", "Recurring");
-        	p.lightbox.add(recurring);
         	
-        	DHXLightboxCheckbox importance = new DHXLightboxCheckbox("importance", "Important");
-        	importance.setCheckedValue("YES");
-        	p.lightbox.add(importance);
+        	
+        	
         	
         	
         	/*DHXLightboxSelect eventType = new DHXLightboxSelect("eventType", "Type");
@@ -171,12 +197,19 @@ public class HelloController {
 	    User user = userService.getUser(username);	    
 	    
 	    String recurringFilter = request.getParameter("hideRecur");
+	    String showMap = request.getParameter("showMap");
 	    
 	    HashMap<String, String> options = new HashMap<String,String>();
 	    
 	    if(recurringFilter != null && recurringFilter.equals("yes")){
 	    	options.put("hideRecur", "yes");
 	    }
+	    if(showMap != null && showMap.equals("yes")){
+	    	options.put("showMap", "yes");
+	    }
+	    
+	    
+	    
 	    
     	EventManager evs = new EventManager(request,eventService,userService,user,options);
     	return evs.run();

@@ -4,10 +4,12 @@ scheduler.xy.map_description_width = 400; // description column width
 scheduler.config.map_resolve_event_location = true; // if events in database doesn't have lat and lng values there will be an attempt to resolve them on event loading, useful for migration
 scheduler.config.map_resolve_user_location = true; // if user will be promted to share his location to display it on the map
 
-scheduler.config.map_initial_position = new google.maps.LatLng(48.724, 8.215); // inital position of the map
-scheduler.config.map_error_position = new google.maps.LatLng(15, 15); // this position will be displayed in case if event doesn't have corresponding coordinates
+scheduler.config.map_initial_position = new google.maps.LatLng(6.56, 79.51); // inital position of the map
+scheduler.config.map_error_position = new google.maps.LatLng(6.56, 79.51); // this position will be displayed in case if event doesn't have corresponding coordinates
 
 scheduler.config.map_infowindow_max_width = 300;
+
+scheduler.config.map_inital_zoom = 5;
 
 scheduler.config.map_type = google.maps.MapTypeId.ROADMAP;
 
@@ -163,7 +165,7 @@ scheduler.attachEvent("onSchedulerReady", function() {
 	scheduler.render_data = function(evs, hold) {
 		if (this._mode == "map") {
 			fill_map_tab();
-			var events = scheduler.get_visible_events();
+			var events = scheduler.get_all_events();
 			for (var i = 0; i < events.length; i++) {
 				if (!scheduler.map._markers[events[i].id]) {
 					showAddress(events[i], false, false);
@@ -198,7 +200,7 @@ scheduler.attachEvent("onSchedulerReady", function() {
 
 	function fill_map_tab() {
 		//select events for which data need to be printed
-		var events = scheduler.get_visible_events();
+		var events = scheduler.get_all_events();
 		events.sort(function(a, b) {
 			if(a.start_date.valueOf()==b.start_date.valueOf())
 				return a.id>b.id?1:-1;
@@ -266,7 +268,7 @@ scheduler.attachEvent("onSchedulerReady", function() {
 			_setMapSize('dhx_gmap');
 			var temp_center = scheduler.map._obj.getCenter();
 
-			var events = scheduler.get_visible_events();
+			var events = scheduler.get_all_events();
 			for (var i = 0; i < events.length; i++) {
 				if (!scheduler.map._markers[events[i].id]) {
 					showAddress(events[i]);

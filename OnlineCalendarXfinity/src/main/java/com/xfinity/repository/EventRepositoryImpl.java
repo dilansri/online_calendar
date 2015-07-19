@@ -54,6 +54,10 @@ public class EventRepositoryImpl implements EventRepository {
 			
 		}
 		
+		if(options.containsKey("showMap") && options.get("showMap").equals("yes")){
+			andConditions += " and event_location != ''";
+		}
+		
 		Query query = em.createQuery("from Event where username=?"+andConditions)
 							.setParameter(1, username);	
 		
