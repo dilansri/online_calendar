@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 		<title>Xfinity Calendar</title>
@@ -10,8 +11,8 @@
     	<header id="header">
 
 				<!-- Logo -->
-					<h1 id="logo" style="font-size:34px;font-weight: 400;">Xfinity Calendar <span style="font-size:18px;"> ${user}'s calendar </span></h1>
-
+					<h1 id="logo" style="font-size:34px;font-weight: 400;">Xfinity Calendar <span style="font-size:18px;"> Planner <c:choose> <c:when test="${param.map != null and param.map == 'yes' }"> <span style="font-size:10px; font-weight:400;"><a style="text-decoration: none;" href="./planner">Hide Map</a></span>  </c:when> <c:otherwise> <span style="font-size:10px; font-weight:400;"><a style="text-decoration: none;" href="./planner?map=yes">Show Map</a></span> </c:otherwise> </c:choose> </span></h1>
+					
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
@@ -26,7 +27,8 @@
 						</ul>
 					</nav>
 
-		</header>
+			</header>
+    
         <div class="content" id="content">
            <div id="scheduler">${body}</div>
         </div>

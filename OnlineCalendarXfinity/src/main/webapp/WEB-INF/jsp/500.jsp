@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Xfinity - 403</title>
+		<title>Xfinity - 500</title>
 
 		<!-- BEGIN META -->
 		<meta charset="utf-8">
@@ -45,8 +45,8 @@
 					<div class="section-body contain-lg">
 						<div class="row">
 							<div class="col-lg-12 text-center">
-								<h1><span class="text-xxxl text-light">403 <i class="fa fa-exclamation-circle text-danger"></i></span></h1>
-								<h2 class="text-light">Oops! Something went wrong</h2>
+								<h1><span class="text-xxxl text-light">500 <i class="fa fa-exclamation-circle text-danger"></i></span></h1>
+								<h2 class="text-light">Oops! Something went wrong. Try again.</h2>
 							</div><!--end .col -->
 						</div><!--end .row -->
 					</div><!--end .section-body -->

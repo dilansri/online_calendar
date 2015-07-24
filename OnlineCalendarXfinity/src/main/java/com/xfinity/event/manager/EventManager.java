@@ -27,7 +27,10 @@ public class EventManager extends DHXEventsManager {
 	
 	HashMap<String, String> options;
 	
-
+	/**
+	 * 
+	 * Initializing the manager with services
+	 */
 	public EventManager(HttpServletRequest request,EventService service,UserService uService,User usr,HashMap<String, String> opt) {
 		super(request);
 		eventService = service;
@@ -36,16 +39,24 @@ public class EventManager extends DHXEventsManager {
 	    user = usr;
 	}
 	
+	/**
+	 * Creation of the event object
+	 */
 	@Override
 	public DHXEv createEvent(String id, DHXStatus status) {
 		
 		return new Event();
 	}
 	
+	/**
+	 * Getting all the personal calendar's events of the user
+	 */
 	@Override
     public Iterable getEvents() {
 		List<Event> events = eventService.findAllEvents(user.getUsername(),options);
-		
+		/**
+		 * Applying user color preferences
+		 */
 		if(!user.getUserPreference().isKeepOldColors()){
 			for(Event ev:events){
 				ev.setUser(user);
@@ -55,12 +66,12 @@ public class EventManager extends DHXEventsManager {
 		return events;
 	}
 	
+	/**
+	 * Creating , deleting , and updating users  personal planner's events
+	 */
 	@Override
 	public DHXStatus saveEvent(DHXEv event, DHXStatus status) {
-		//eventService.save(event);
 		Event ev = (Event)event;
-		
-		//ev.setColor("orange");	    
 	    ev.setUser(user);
 	    ev.setColor();	    
 	    

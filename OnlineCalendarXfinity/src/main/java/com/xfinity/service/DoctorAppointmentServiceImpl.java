@@ -1,5 +1,6 @@
 package com.xfinity.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,10 @@ public class DoctorAppointmentServiceImpl implements DoctorAppointmentService {
 	}
 
 	public boolean isValid(DoctorAppointment appointment) {
-		if(doctorAppointmentRepository.isValid(appointment) && getMinutes(appointment) < max_allowed_hours * 60 && getMinutes(appointment) > min_allowed_minutes){
+		if(doctorAppointmentRepository.isValid(appointment) 
+				&& getMinutes(appointment) < max_allowed_hours * 60 
+				&& getMinutes(appointment) > min_allowed_minutes
+				&& appointment.getStart_date().after(new Date())){
 			return true;
 		}
 		

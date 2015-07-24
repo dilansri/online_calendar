@@ -19,18 +19,25 @@ import com.xfinity.model.UserPreference;
 import com.xfinity.service.UserService;
 
 
-
+/**
+ * Handling user login and registration
+ */
 @Controller
 public class UserController {
 	
+	/**
+	 * Injecting user service
+	 */
 	@Autowired
 	UserService userService;
 	
 	@RequestMapping(value="/register")
 	public ModelAndView register(HttpServletRequest request){
 		
+		/**
+		 * Registering the user in the system
+		 */
 		if(request.getMethod().equals("POST")){
-			//model.addAttribute("greeting","HELLO WORLDss");	
 			String username= request.getParameter("username");
 			String password = request.getParameter("password");
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -41,10 +48,13 @@ public class UserController {
 			registeredUser.setUserPreference(userPreference);
 			userPreference.setUser(registeredUser);
 			
-			//userService.savePreference(userPreference);
 			try{
 				userService.save(registeredUser);
-			}catch(javax.persistence.PersistenceException exception){
+			}
+			/** 
+			 * Handling error of user registration process
+			 */
+			catch(javax.persistence.PersistenceException exception){
 				ModelAndView mnv = new ModelAndView("register");
 				mnv.addObject("error","User already exists. Try a different username.");
 				return mnv;
@@ -53,6 +63,9 @@ public class UserController {
 				mnv.addObject("error","Something went wrong. Please try again later.");
 				return mnv;
 			}
+			/**
+			 * SUccess registration of the user in the system
+			 */
 			ModelAndView mnv = new ModelAndView("register");
 			mnv.addObject("success","You've been successfully registered.");
 			return mnv;

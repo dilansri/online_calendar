@@ -22,6 +22,9 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 	private User user;
 	private EventService eventService;
 	
+	/**
+	 * Initializing the appointment manager with service
+	 */
 	public DoctorAppointmentManager(HttpServletRequest request,DoctorAppointmentService service,EventService eService,User usr) {
 		super(request);
 		doctorAppointmentService = service;
@@ -29,6 +32,9 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 		user = usr;
 	}
 	
+	/*
+	 * Creation of new Appointment 
+	 */
 	
 	@Override
 	public DHXEv createEvent(String id, DHXStatus status) {
@@ -36,7 +42,9 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 		return new DoctorAppointment();
 	}
 	
-	
+	/**
+	 * Sending all the appointments to the doctor calendar
+	 */
 	@Override
     public Iterable getEvents() {
 		List<DoctorAppointment> appointments = doctorAppointmentService.findAllAppointments();	
@@ -51,24 +59,29 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 		}
 		return appointments;
 	}
-	
+	/*
+	 *Managing creatingdeleting and modification of the events and persist them.
+	 */
 	@Override
 	public DHXStatus saveEvent(DHXEv event, DHXStatus status) {
-		//eventService.save(event);
+		/**
+		 * Setting appointment properties
+		 */
 		DoctorAppointment appointment = (DoctorAppointment)event;
 		appointment.setUser(user);
 		appointment.setColor();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String currentUser = auth.getName(); 
 	    
-	    if(status == DHXStatus.INSERT){
-	    	
-	    	//CHECK For overlaps
-	    	if(!doctorAppointmentService.isValid(appointment)){
-	    		return DHXStatus.ERROR;
-	    	}
-	    	
-	    }else if (status == DHXStatus.UPDATE || status == DHXStatus.DELETE){
+	    /**
+	     * Checking for the validity of the appointment
+	     */
+	    
+	    if(!doctorAppointmentService.isValid(appointment)){
+    		return DHXStatus.ERROR;
+    	}
+	    
+	    if (status == DHXStatus.UPDATE || status == DHXStatus.DELETE){
 	    	int appointmentId = appointment.getId();	    	
 	    	String eventUser = doctorAppointmentService.getUsername(appointmentId);
 		    
@@ -80,6 +93,10 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 	    
 	    appointment.setUser(user);
 	    
+	    
+	    /**
+	     * Syncing appointment with user's personal planner
+	     */
 	    Event personalEvent = new Event();
 	    personalEvent.setStart_date(appointment.getStart_date());
 	    personalEvent.setEnd_date(appointment.getEnd_date());
@@ -87,8 +104,9 @@ public class DoctorAppointmentManager extends DHXEventsManager {
 	    personalEvent.setUser(user);
 	    personalEvent.setColor();
 	    
-		//ev.setColor("orange");	    
-	    //ev.setUser(user);
+	    /**
+	     * Using services to store the appointment
+	     */
 		if (status == DHXStatus.INSERT){
 			doctorAppointmentService.save(appointment);
 			eventService.save(personalEvent);

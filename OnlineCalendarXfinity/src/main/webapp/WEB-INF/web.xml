@@ -28,6 +28,17 @@
    		
    </servlet-mapping>
    
-   
-  <display-name>Archetype Created Web Application</display-name>
+   <error-page>
+	    <error-code>404</error-code>
+	    <location>/WEB-INF/jsp/404.jsp</location>
+	</error-page>
+	 <error-page>
+	    <error-code>403</error-code>
+	    <location>/WEB-INF/jsp/403.jsp</location>
+	</error-page>
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/WEB-INF/jsp/500.jsp</location>
+	</error-page>
+  <display-name>Xfinity Online Calendar</display-name>
 </web-app>

@@ -74,4 +74,15 @@ public class CalendarRepositoryImpl implements CalendarRepository {
 		return sharedByUser;
 	}
 
+	public boolean deleteSharing(String sharedByUser, String sharedWithUser) {
+		Query query = em.createQuery("delete from SharedCalendar where sharedBy= :sharedBy and sharedWith = :sharedWith")
+				.setParameter("sharedBy", sharedByUser)
+				.setParameter("sharedWith", sharedWithUser);
+		int count = query.executeUpdate();
+		
+		if(count > 0)
+			return true;
+		return false;
+	}
+
 }

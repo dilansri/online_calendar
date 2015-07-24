@@ -14,4 +14,6 @@ public interface CalendarService {
 
 	List<String> getSharedCalendarsByMe();
 
+	boolean revokeCalendarSharing(String sharedByUser, String sharedWithUser);
+
 }

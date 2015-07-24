@@ -93,13 +93,7 @@ public class Event extends DHXEventRec {
             this.importance = importance;
     }
     
-    private String eventType;
-    public String getEventType() {
-            return eventType;
-    }
-    public void setEventType(String eventType) {
-            this.eventType = eventType;
-    }
+    
     
     public String event_location;
 	public String getEvent_location() {

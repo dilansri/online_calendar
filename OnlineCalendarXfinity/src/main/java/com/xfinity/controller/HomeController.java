@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/")
 public class HomeController {
 	
+	/**
+	 * Handling request to the home page
+	 */
 	@RequestMapping(method=RequestMethod.GET)	
 	public String index(Model model){	
 		

@@ -33,7 +33,8 @@
 		<header id="header">
 
 				<!-- Logo -->
-					<h1 id="logo">Xfinity Calendar</h1>
+					<h1 id="logo" style="font-size:34px;font-weight: 400;">Xfinity Calendar <span style="font-size:18px;"> Search </span></h1>
+
 
 				<!-- Nav -->
 					<nav id="nav">
@@ -91,7 +92,7 @@
 									
 									<td><fmt:formatDate pattern="E d/M/y h:m a" value="${item.start_date}" /></td>
 									<td><fmt:formatDate pattern="E d/M/y h:m a" value="${item.end_date}" /></td>
-									<td>${item.text}</td>
+									<td>${item.text} <c:if test="${item.event_location != null}">at ${item.event_location}</c:if>  </td>
 									
 								</tr>
 								</c:forEach>

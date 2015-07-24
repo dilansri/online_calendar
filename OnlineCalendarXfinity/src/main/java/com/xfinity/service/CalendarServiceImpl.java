@@ -47,5 +47,10 @@ public class CalendarServiceImpl implements CalendarService {
 		
 		return calendarRepository.getSharedBy(me);
 	}
+	
+	@Transactional
+	public boolean revokeCalendarSharing(String sharedByUser, String sharedWithUser) {
+		return calendarRepository.deleteSharing(sharedByUser,sharedWithUser);		
+	}
 
 }

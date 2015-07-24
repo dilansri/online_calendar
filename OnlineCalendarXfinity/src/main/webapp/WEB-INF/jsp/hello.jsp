@@ -15,12 +15,12 @@
 					<p>Never be late for a very important date.<br />
 				Use Xfinity Calendar to keep track of all special occasions.</p>
 					<ul class="actions">
-						<li><a href="#two" class="button icon fa-chevron-down scrolly">View Features</a></li>
+						<li><a href="#two" class="button icon fa-chevron-down scrolly">View Our Outstanding Features</a></li>
 						<li><a href="./login" class="button special icon fa-download">Login</a></li>
 						<li><a href="./register" class="button special">Register</a></li>
 					</ul>
 				</div>
-				<div class="image"><div class="inner"><img src="images/screen.jpg" alt="" /></div></div>
+				<div class="image"><div class="inner"><img src="images/screen.png" alt="" /></div></div>
 			</header>
 
 		<!-- One 
@@ -34,38 +34,38 @@
 			<section id="two" class="wrapper">
 				<div class="inner alt">
 					<section class="spotlight">
-						<div class="image"><img src="./images/recurring.jpg" alt="" /></div>
+						<div class="image"><img src="images/recurring.png" alt="" /></div>
 						<div class="content">
 							<h3>Recurring events</h3>
 							<p>We make it easy to add events that happen more than once, like meetings, classes, appointments, or birthdays.</p>
 						</div>
 					</section>
 					<section class="spotlight">
-						<div class="image"><img src="./images/agenda.jpg" alt="" /></div>
+						<div class="image"><img src="images/agenda.png" alt="" /></div>
 						<div class="content">
 							<h3>Agenda</h3>
 							<p>View all the upcoming events on one place.</p>
 						</div>
 					</section>
 					<section class="spotlight">
-						<div class="image"><img src="./images/team.jpg" alt="" /></div>
+						<div class="image"><img src="images/team.png" alt="" /></div>
 						<div class="content">
 							<h3>Team Calendar</h3>
 							<p>You might want a shared group calendar for the holidays your company observes and another one for your organization's "All Hands" meetings.</p>
 						</div>
 					</section>
 					<section class="spotlight">
-						<div class="image"><img src="./images/share.jpg" alt="" /></div>
+						<div class="image"><img src="images/share.png" alt="" /></div>
 						<div class="content">
-							<h3>Share Calendar</h3>
+							<h3>Shared Calendar</h3>
 							<p>If you're using stand-alone calendars to schedule events, you'll want to make sure the right team members can see your calendars. Just share your calendars with your team, and everyone will be on time.</p>
 						</div>
 					</section>
 					<section class="spotlight">
-						<div class="image"><img src="./images/search.jpg" alt="" /></div>
+						<div class="image"><img src="images/search.png" alt="" /></div>
 						<div class="content">
 							<h3>Search Calendar</h3>
-							<p>In Xfinity online calendar, it's easy to keep track of all the important events in one place.</p>
+							<p>In Xfinity Online Calendar, it's easy to search and filter of your events.</p>
 						</div>
 					</section>
 				</div>

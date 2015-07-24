@@ -16,7 +16,6 @@
 			    <property column="textColor" name="textColor" type="java.lang.String"/>
 			    <property column="color" name="color" type="java.lang.String"/>
 			    <property column="importance" name="importance" type="java.lang.String"/>
-			    <property column="event_type" name="eventType" type="java.lang.String"/>
 			    <property column="event_location" name="event_location" type="java.lang.String"/>
 			    <property column="lat" name="lat" type="java.lang.String"/>
 			    <property column="lng" name="lng" type="java.lang.String"/>

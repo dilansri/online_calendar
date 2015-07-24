@@ -12,4 +12,6 @@ public interface CalendarRepository {
 	List<String> getSharedWith(String user);
 
 	List<String> getSharedBy(String user);
+
+	boolean deleteSharing(String sharedByUser, String sharedWithUser);
 }

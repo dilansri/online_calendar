@@ -10,7 +10,7 @@
     	<header id="header">
 
 				<!-- Logo -->
-					<h1 id="logo" style="font-size:34px;font-weight: 400;">Xfinity Calendar <span style="font-size:18px;"> ${user}'s calendar </span></h1>
+					<h1 id="logo" style="font-size:34px;font-weight: 400;">Xfinity Calendar <span style="font-size:18px;"> Team Calendar </span></h1>
 
 				<!-- Nav -->
 					<nav id="nav">
@@ -26,7 +26,8 @@
 						</ul>
 					</nav>
 
-		</header>
+			</header>
+    
         <div class="content" id="content">
            <div id="scheduler">${body}</div>
         </div>

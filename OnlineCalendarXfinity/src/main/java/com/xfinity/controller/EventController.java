@@ -1,6 +1,5 @@
 package com.xfinity.controller;
 
-import java.sql.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,94 +16,93 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dhtmlx.planner.DHXPlanner;
 import com.dhtmlx.planner.DHXSkin;
 import com.dhtmlx.planner.controls.DHXAgendaView;
-import com.dhtmlx.planner.controls.DHXLightboxField;
 import com.dhtmlx.planner.controls.DHXLightboxText;
 import com.dhtmlx.planner.controls.DHXMapView;
 import com.dhtmlx.planner.data.DHXDataFormat;
 import com.dhtmlx.planner.extensions.DHXExtension;
 import com.xfinity.event.manager.EventManager;
-import com.xfinity.model.Event;
 import com.xfinity.model.User;
 import com.xfinity.model.UserPreference;
 import com.xfinity.service.EventService;
 import com.xfinity.service.UserService;
 
 @Controller
-public class HelloController {
+public class EventController {
 	
+	/**
+	 * Injecting required services
+	 */
 	@Autowired
 	private EventService eventService;
 	
 	@Autowired
 	UserService userService;
 	
+	
+	/**
+	 * Routings for main calendar Pages
+	 */
+			
+	
 	@RequestMapping(value="/")
-	public String homeS(Model model){
-		model.addAttribute("greeting","HELLO WORLDss");	
+	public String home(Model model){
 		return "hello";
 	}	
 	
+	@RequestMapping(value="/404")
+	public String error404Page(){
+		return "403";
+	}
 	
 	@RequestMapping(value="/greeting")
-	public String sayHello(Model model){
-		model.addAttribute("greeting","HELLO WORLDss");
-		
-		Event evt = new Event();
-		evt.setStart_date(new Date(115,5,24));
-		evt.setEnd_date(new Date(115,5,25));
-		evt.setText("Test Event");
-		eventService.save(evt);		
-		return "hello";
+	public String sayHello(Model model){			
+		return "test";
 	}	
 	
+	/**
+	 * Personal Planner Handling
+	 */
 	@RequestMapping("/my/planner")
     public ModelAndView planner(HttpServletRequest request) throws Exception {	
-		
+			
+		/**
+		 * Check for authentication of the user
+		 */
 			if(!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
 				return new ModelAndView("redirect:/login");
 			}
-		
+		/**
+		 * Initializing the Planner with user settings
+		 */
 			User user = getUser();
 			UserPreference userPref = user.getUserPreference();
             DHXPlanner p = new DHXPlanner("../codebase_common/", DHXSkin.valueOf(userPref.getSkin()));
             
             String params = "";
-            
+        /**
+         * Hiding recurring events logic    
+         */
             String recurringFilter = request.getParameter("hideRecur");
             if(recurringFilter != null && recurringFilter.equals("yes")){
             	params += "hideRecur=yes&";
             }
-            //p.setInitialDate(2013, 1, 2);
+            
+            /**
+             * Configurations of the planner
+             */
             p.extensions.add(DHXExtension.RECURRING);
-            //p.config.setScrollHour(8);
         	p.config.setFullDay(true);
         	p.config.setMultiDay(true);
-        	//p.views.add(new DHXAgendaView());
-        	//p.extensions.add(DHXExtension.WEEK_AGENDA);
+        	p.toPDF();
         	p.calendars.attachMiniCalendar();
         	p.extensions.add(DHXExtension.TOOLTIP);
-        	//p.setInitialView("month");
         	p.config.setDetailsOnCreate(true);
         	p.config.setDetailsOnDblClick(true);
         	
         	
-        	/*DHXLightboxField f = p.lightbox.get(0);
-        	System.out.println("Name:"+f.getName());
-        	System.out.println("MapsTo:"+f.getMapTo());
-        	System.out.println("Label:"+f.getLabel());
-        	System.out.println("Type:"+f.getType());
-        	System.out.println("Hidden:"+f.getHiddenProperties());
-        	System.out.println("Properties:"+f.getProperties());*/
-        	/*DHXLightboxCheckbox importance = new DHXLightboxCheckbox("importance", "Important");
-        	importance.setCheckedValue("YES");
-        	p.lightbox.add(importance);*/
-        	
-        	
-        	
-        	/*DHXLightboxMiniCalendar cal = new DHXLightboxMiniCalendar("Mini");
-        	p.lightbox.add(cal);*/
-        	
-        	
+        	/**
+        	 * Showing Map logic
+        	 */
         	
         	String enableMap = request.getParameter("map");
             if(enableMap != null && enableMap.equals("yes")){
@@ -123,68 +121,22 @@ public class HelloController {
             	params += "showMap=yes&";
             }
         	
-        	
-        	
-        	
-        	
-        	
-        	
-        	/*
-        	DHXLightboxSelect select = new DHXLightboxSelect("textColor", "Priority");
-        	select.setServerList("textColor");
-        	select.addOption(new DHXLightboxSelectOption("grey","low"));
-        	p.lightbox.add(select);
-        	
-        	DHXLightboxCheckbox check = new DHXLightboxCheckbox("highlighting", "Important");
-        	check.setMapTo("textColor");
-        	check.setCheckedValue("red");
-        	 
-        	p.lightbox.add(check);*/
-        	
-        	
-        	/*DHXLightboxSelect priority = new DHXLightboxSelect("importance", "Priority");
-        	priority.addOption(new DHXLightboxSelectOption("LOW","Low"));
-        	priority.addOption(new DHXLightboxSelectOption("MEDIUM","Medium"));
-        	priority.addOption(new DHXLightboxSelectOption("HIGH","High"));        	
-        	p.lightbox.add(priority);*/
-        	
-        	
-        	
-        	
-        	
-        	
-        	/*DHXLightboxSelect eventType = new DHXLightboxSelect("eventType", "Type");
-        	eventType.addOption(new DHXLightboxSelectOption("MEETING","Meeting"));
-        	eventType.addOption(new DHXLightboxSelectOption("CONFERENCE","Conference"));
-        	eventType.addOption(new DHXLightboxSelectOption("APPOINTMENT","Appointment"));        	
-        	p.lightbox.add(eventType);
-        	*/
-        	
-        	
-        	
-        	        	
-            //p.setWidth(900);
-        	
-        	/*
-        	DHXBlockTime block = new DHXBlockTime();
-        	block.setDay(DHXDayOfWeek.SUNDAY);
-        	p.timespans.add(block);
-        	
-        	DHXBlockTime block2 = new DHXBlockTime();
-        	block2.setDay(DHXDayOfWeek.SATURDAY);
-        	p.timespans.add(block2);
-        	
-        	*/
-        	
-        	p.toPDF();
+        	/**
+        	 * Responding to the request with View model        	
+        	 */
         	
             p.load("../my/events?"+params, DHXDataFormat.JSON);
             p.data.dataprocessor.setURL("../my/events");
-            ModelAndView mnv = new ModelAndView("article");
+            ModelAndView mnv = new ModelAndView("planner");
             mnv.addObject("body", p.render());
             return mnv;
     }
-
+	
+	
+/**
+ *  Helper method to get the logged in user
+ * 
+ */
     private User getUser() {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String username = auth.getName();		
@@ -192,6 +144,11 @@ public class HelloController {
 	    return user;
 	}
 
+    
+/**
+ * Communication with the EventManager
+ * 
+ */
 
 	@RequestMapping("/my/events")
     @ResponseBody public String events(HttpServletRequest request) {
@@ -222,50 +179,47 @@ public class HelloController {
 	    
     	EventManager evs = new EventManager(request,eventService,userService,user,options);
     	return evs.run();
-            //CustomEventsManager evs = new CustomEventsManager(request);
-            //return evs.run();
     }
-    
+/**
+ * Handling Agenda View's Logic    
+ * 
+ */
     @RequestMapping("/my/agenda")
     public ModelAndView agenda(HttpServletRequest request) throws Exception {
     	
+    	/**
+    	 * Authentication check
+    	 */
     	if(!SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
 			return new ModelAndView("redirect:/login");
 		}
-	
-    	
-    	DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
-        //p.setInitialDate(2013, 1, 2);
-        p.extensions.add(DHXExtension.RECURRING);
-        //p.config.setScrollHour(8);
+	/**
+	 * Retreving logged in user and initializing the agenda
+	 */
+    	User user = getUser();
+		UserPreference userPref = user.getUserPreference();
+    	DHXPlanner p = new DHXPlanner("../codebase/", DHXSkin.valueOf(userPref.getSkin()));
+        
+    	/**
+    	 * Agenda View's configuration
+    	 */
+        p.extensions.add(DHXExtension.RECURRING);        
     	p.config.setFullDay(true);
     	p.config.setMultiDay(true);
+    	p.toPDF();
     	p.views.clear();
     	p.views.add(new DHXAgendaView());
     	p.setInitialView("agenda");
-    	//p.extensions.add(DHXExtension.WEEK_AGENDA);
-    	//p.calendars.attachMiniCalendar();
     	
-        //p.setWidth(900);
     	
-    	/*
-    	DHXBlockTime block = new DHXBlockTime();
-    	block.setDay(DHXDayOfWeek.SUNDAY);
-    	p.timespans.add(block);
-    	
-    	DHXBlockTime block2 = new DHXBlockTime();
-    	block2.setDay(DHXDayOfWeek.SATURDAY);
-    	p.timespans.add(block2);
-    	
-    	*/
-    	
-    	p.toPDF();
-    	
+    	    	
+    	/**
+    	 * Retreving Events for the Agenda
+    	 */
         p.load("../my/events", DHXDataFormat.JSON);
         p.data.dataprocessor.setURL("../my/events");
-        ModelAndView mnv = new ModelAndView("article");
+        ModelAndView mnv = new ModelAndView("agenda");
         mnv.addObject("body", p.render());
         return mnv;
     }
-	
 }

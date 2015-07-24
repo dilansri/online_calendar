@@ -30,7 +30,7 @@
 		<header id="header">
 
 				<!-- Logo -->
-					<h1 id="logo" style="font-size:34px;">Xfinity Calendar</h1>
+					<h1 id="logo" style="font-size:34px;font-weight: 400;">Xfinity Calendar <span style="font-size:18px;"> Share </span></h1>
 
 				<!-- Nav -->
 					<nav id="nav">
@@ -94,7 +94,7 @@
 												<div class="input-group">
 													<div class="input-group-content">
 														<input name="shared_with" type="text" class="form-control" id="groupbutton9">
-														<label for="groupbutton9">Enter username to share</label>
+														<label for="groupbutton9">Enter username to share you calendar</label>
 													</div>
 													<div class="input-group-btn">
 														<button class="btn btn-primary btn-raised" type="submit">Share</button>
@@ -146,7 +146,7 @@
 													<a class="tile-content ink-reaction">
 														<div class="tile-text">${item}</div>
 													</a>
-													<a class="btn btn-flat ink-reaction"  href="#">
+													<a class="btn btn-flat ink-reaction"  href="./share?del=${item}">
 														<i class="fa fa-trash"></i>
 													</a>
 												</li>

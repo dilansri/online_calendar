@@ -19,7 +19,7 @@ public class SearchRepositoryImpl implements SearchRepository {
 
 	public List<Event> search(Date startDate, Date endDate,String username) {
 		
-		Query query = em.createQuery("from Event where start_date >= :startDate and end_date <= :endDate and username = :username")
+		Query query = em.createQuery("from Event where start_date >= :startDate and end_date <= :endDate and username = :username ORDER BY start_date")
 						.setParameter("startDate", startDate)
 						.setParameter("endDate", endDate)
 						.setParameter("username", username);	

@@ -22,6 +22,9 @@ public class TeamEventManager extends DHXEventsManager {
 	private User user;
 	private EventService eventService;
 	
+	/**
+	 * Initializing Team Event manager with services
+	 */
 	public TeamEventManager(HttpServletRequest request,TeamEventService service,EventService eService,User usr) {
 		super(request);
 		teamEventService = service;
@@ -29,14 +32,18 @@ public class TeamEventManager extends DHXEventsManager {
 		eventService = eService;
 	}
 	
-	
+	/**
+	 * Creation of team event object
+	 */
 	@Override
 	public DHXEv createEvent(String id, DHXStatus status) {
 		
 		return new TeamEvent();
 	}
 	
-	
+	/**
+	 * Getting all the team events
+	 */
 	@Override
     public Iterable getEvents() {
 		List<TeamEvent> events = teamEventService.findAllEvents();	
@@ -52,6 +59,9 @@ public class TeamEventManager extends DHXEventsManager {
 		return events;
 	}
 	
+	/**
+	 * Handling adding, deleting, and modifying of team events
+	 */
 	@Override
 	public DHXStatus saveEvent(DHXEv event, DHXStatus status) {
 		//eventService.save(event);
@@ -59,6 +69,9 @@ public class TeamEventManager extends DHXEventsManager {
 		ev.setUser(user);
 		ev.setColor();
 		
+		/**
+		 * CHeck for authorization for modification and delete
+		 */
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    String currentUser = auth.getName(); 
 	    
@@ -72,6 +85,9 @@ public class TeamEventManager extends DHXEventsManager {
 	    	
 	    }
 	    
+	    /**
+	     * Syncing team event with personal calendar
+	     */
 	    ev.setUser(user);
 	    Event teamEvent = new Event();
 	    teamEvent.setStart_date(ev.getStart_date());
@@ -80,10 +96,9 @@ public class TeamEventManager extends DHXEventsManager {
 	    teamEvent.setUser(user);
 	    teamEvent.setTeamColor();
 	    
-	    
-	    
-		//ev.setColor("orange");	    
-	    //ev.setUser(user);
+	    /**
+	     * Persisting new and modified team events
+	     */
 		if (status == DHXStatus.INSERT){
 			teamEventService.save(ev);
 			eventService.save(teamEvent);

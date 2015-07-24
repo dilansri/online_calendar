@@ -17,14 +17,24 @@ import com.xfinity.service.SearchService;
 
 @Controller
 public class SearchController {
-	
+	/**
+	 * Injecting search services
+	 */
 	@Autowired
 	private SearchService searchService;
+	
+	/**
+	 * Handling user's search requests
+	 */
+	
 	@RequestMapping("/my/search")
     public ModelAndView planner(HttpServletRequest request) throws Exception {
 		
 		ModelAndView mnv = new ModelAndView("search");
         
+		/**
+		 * Searching eligible events from search service
+		 */
 		List<Event> searchResult = new ArrayList<Event>();
 		if(request.getMethod().equals("POST")){
 			String startDateString = request.getParameter("startDate");
